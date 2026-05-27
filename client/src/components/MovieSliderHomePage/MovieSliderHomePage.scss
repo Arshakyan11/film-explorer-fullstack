@@ -1,5 +1,9 @@
 body {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family:
+    Helvetica Neue,
+    Helvetica,
+    Arial,
+    sans-serif;
   color: #000;
 }
 .swiper-pagination {
@@ -110,39 +114,29 @@ body {
   left: var(--swiper-navigation-sides-offset, 10px);
   right: auto;
 }
-.swiper-button-next,
-.swiper-rtl .swiper-button-prev {
-  right: var(--swiper-navigation-sides-offset, 10px);
-  left: auto;
-}
+
 .swiper-button-lock {
   display: none;
 }
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  font-family: swiper-icons;
-  font-size: var(--swiper-navigation-size);
-  text-transform: none !important;
-  letter-spacing: 0;
-  font-variant: initial;
-  line-height: 1;
+.swiper-button-prev::after {
+  content: "<";
+  font-size: 40px;
+  font-family: Arial, sans-serif;
+  color: #1e90ff;
+}
+
+.swiper-button-next::after {
+  content: ">";
+  font-size: 40px;
+  font-family: Arial, sans-serif;
+  color: #1e90ff;
 }
 .swiper-button-prev:after,
 .swiper-button-next:after {
-  content: "prev";
   @media screen and (max-width: 810px) {
     font-size: 30px;
   }
   @media screen and (max-width: 650px) {
     font-size: 20px;
   }
-}
-.swiper-button-next,
-.swiper-rtl .swiper-button-prev {
-  right: var(--swiper-navigation-sides-offset, 10px);
-  left: auto;
-}
-.swiper-button-next:after,
-.swiper-rtl .swiper-button-prev:after {
-  content: "next";
 }

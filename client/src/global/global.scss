@@ -1,0 +1,15 @@
+@mixin disFlex() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+$WhiteColor: white;
+
+@mixin backImage() {
+  background: url("../../img/back1.jpeg");
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center;
+}

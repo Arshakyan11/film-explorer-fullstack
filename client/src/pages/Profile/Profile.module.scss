@@ -1,0 +1,97 @@
+@use "../../global/global.scss" as *;
+.sectionProfile {
+  background: linear-gradient(to right, #1c1b1f, #2c2b30);
+  .container {
+    display: flex;
+    color: white;
+    max-width: 1440px;
+    margin: auto;
+    svg {
+      margin: 10px;
+    }
+    main {
+      border-right: 1px solid rgb(70, 58, 58);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 400px;
+      width: 100%;
+      fieldset {
+        border: none;
+        position: relative;
+        .showHide {
+          color: rgb(47, 47, 152);
+          cursor: pointer;
+          position: absolute;
+          right: 15px;
+          top: 5px;
+          border-radius: 20px;
+          color: white;
+          font-size: 30px;
+        }
+        legend {
+          color: red;
+          padding-left: 5px;
+        }
+      }
+      input {
+        max-width: 400px;
+
+        width: 100%;
+      }
+    }
+    .profileMain {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      gap: 20px;
+      background: radial-gradient(circle at center, #1c1b1f, #2c2b30);
+      .profileTitle {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        svg {
+          margin: 0 15px 0 0;
+        }
+      }
+      .input {
+        background: #2c2b30;
+        border: none;
+        max-width: 426px;
+        width: 100%;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 20px;
+      }
+      .saveButton {
+        background: red;
+        border: none;
+        padding: 12px 20px;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    }
+    @media screen and (max-width: 450px) {
+      flex-direction: column;
+    }
+    @media screen and (max-width: 360px) {
+      .profileMain {
+        .profileTitle {
+          font-size: 20px;
+        }
+        .input {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

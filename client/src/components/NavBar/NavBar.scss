@@ -1,0 +1,658 @@
+@use "../../global/global.scss" as *;
+
+.nav {
+  background: rgba(0, 0, 0, 0.941);
+  position: sticky;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  .container {
+    max-width: 1440px;
+    margin: auto;
+    .navSection {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      .navTopSection {
+        padding: 5px 70px;
+        @include disFlex();
+        justify-content: space-between;
+        position: relative;
+        gap: 10px;
+        .left {
+          @include disFlex();
+          gap: 50px;
+          img {
+            width: 150px;
+            cursor: pointer;
+          }
+          ul {
+            @include disFlex();
+            gap: 30px;
+            li {
+              a {
+                color: $WhiteColor;
+                font-weight: 500;
+                font-size: 22px;
+                gap: 4px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                span {
+                  font-size: 17px;
+                }
+              }
+              img {
+                color: white;
+                width: 40px;
+              }
+            }
+          }
+        }
+        .right {
+          @include disFlex();
+          gap: 70px;
+          .searchBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            max-width: 246px;
+            width: 100%;
+            img {
+              width: 25px;
+            }
+            input {
+              padding: 5px 10px;
+              border: none;
+              border-radius: 20px;
+              background-color: gray;
+              outline: none;
+              color: white;
+              font-size: 16px;
+              cursor: pointer;
+              &::placeholder {
+                color: white;
+              }
+            }
+            ul {
+              top: 80px;
+              left: 47%;
+              position: absolute;
+              max-width: 350px;
+              width: 100%;
+              background-color: #444;
+              border-radius: 10px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+              z-index: 1000;
+              padding: 8px 0;
+              list-style: none;
+              color: #fff;
+              li {
+                padding: 0.5rem 1rem;
+                transition: all 0.2s;
+                &:hover {
+                  background-color: #555;
+                }
+                .eachMovie {
+                  text-decoration: none;
+                  color: #fff;
+                  display: block;
+
+                  &:hover {
+                    color: #ffd700;
+                  }
+                }
+                .exploreMore {
+                  color: red;
+                }
+              }
+            }
+          }
+        }
+        .allRight {
+          @include disFlex();
+          gap: 20px;
+          color: $WhiteColor;
+          cursor: pointer;
+          .profile {
+            color: #a78bfa;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            overflow: hidden;
+            transition: 0.3s;
+            &:hover {
+              color: red;
+            }
+          }
+          .sign {
+            @include disFlex();
+            gap: 10px;
+            background: linear-gradient(45deg, #444, #666);
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #a78bfa;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            overflow: hidden;
+            transition: 0.3s;
+            transition: all 0.5s;
+            svg {
+              color: white;
+            }
+            &:hover {
+              background: linear-gradient(45deg, #666, #888);
+              box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+              transform: scale(1.1);
+              color: red;
+            }
+          }
+        }
+        .hamburgerNav {
+          display: none;
+          svg {
+            color: white;
+            font-size: 60px;
+            cursor: pointer;
+          }
+        }
+      }
+      // HamburgerStyle
+      .hamburgerMenu {
+        display: none;
+        background: rgba(94, 21, 21);
+        background: rgb(58, 110, 92);
+        .left {
+          @include disFlex();
+          display: none;
+          padding-top: 20px;
+          ul {
+            @include disFlex();
+            gap: 30px;
+            li {
+              a {
+                color: $WhiteColor;
+                font-weight: 500;
+                font-size: 22px;
+                gap: 4px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                span {
+                  font-size: 14px;
+                }
+              }
+              img {
+                color: white;
+                width: 40px;
+              }
+            }
+          }
+        }
+
+        .right {
+          flex-direction: column;
+          gap: 20px;
+          padding: 20px;
+          overflow: hidden;
+          .allRight {
+            display: none;
+            gap: 20px;
+            flex-direction: column;
+            padding: 0 20px;
+            color: $WhiteColor;
+            cursor: pointer;
+            .profile {
+              color: #a78bfa;
+              font-size: 20px;
+              font-weight: bold;
+              border: none;
+              overflow: hidden;
+              transition: 0.3s;
+              &:hover {
+                color: red;
+              }
+            }
+            .sign {
+              @include disFlex();
+              gap: 10px;
+              border-radius: 8px;
+              cursor: pointer;
+              color: #a78bfa;
+              font-size: 20px;
+              font-weight: bold;
+              border: none;
+              overflow: hidden;
+              transition: 0.3s;
+              transition: all 0.5s;
+              box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+              padding: 12px 25px;
+              svg {
+                color: white;
+              }
+              &:hover {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+                transform: scale(1.05);
+                color: red;
+              }
+            }
+          }
+          .searchBox {
+            display: none;
+            gap: 10px;
+            align-items: center;
+            margin: 0 20px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: gray;
+            img {
+              width: 20px;
+              height: 20px;
+            }
+            input {
+              width: 97%;
+              border: none;
+              background: none;
+              outline: none;
+              color: white;
+              font-size: 16px;
+              cursor: pointer;
+              &::placeholder {
+                color: white;
+              }
+            }
+            ul {
+              top: 290px;
+              left: 7%;
+              position: absolute;
+              width: 550px;
+              background-color: #444;
+              border-radius: 10px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+              z-index: 1000;
+              padding: 0.5rem 0;
+              list-style: none;
+              color: #fff;
+              li {
+                padding: 0.5rem 1rem;
+                transition: all 0.2s;
+                &:hover {
+                  background-color: #555;
+                }
+                .eachMovie {
+                  text-decoration: none;
+                  color: #fff;
+                  display: block;
+
+                  &:hover {
+                    color: #ffd700;
+                  }
+                }
+                .exploreMore {
+                  color: red;
+                }
+              }
+            }
+          }
+        }
+      }
+      // HamburgerStyle
+
+      @media screen and (max-width: 1370px) {
+        .navTopSection {
+          padding: 5px 35px;
+          .left {
+            gap: 40px;
+            ul {
+              gap: 20px;
+            }
+          }
+          .right {
+            gap: 50px;
+            .allRight {
+              .sign {
+                padding: 12px 16px;
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 1195px) {
+        .navTopSection {
+          padding: 5px 25px;
+          gap: 20px;
+          .left {
+            ul {
+              li {
+                a {
+                  span {
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+          }
+          .right {
+            gap: 30px;
+          }
+        }
+      }
+      @media screen and (max-width: 1135px) {
+        .navTopSection {
+          padding: 5px 20px;
+          .left {
+            gap: 30px;
+            ul {
+              li {
+                a {
+                  span {
+                    font-size: 15px;
+                  }
+                }
+              }
+            }
+          }
+          .right {
+            gap: 30px;
+            .searchBox {
+              img {
+                width: 22px;
+              }
+            }
+            .allRight {
+              .sign {
+                font-size: 17px;
+                &:hover {
+                  transform: scale(1.08);
+                }
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 1075px) {
+        .navTopSection {
+          .left {
+            gap: 60px;
+            ul {
+              gap: 30px;
+            }
+          }
+          .right {
+            flex-grow: 1;
+            .searchBox {
+              max-width: 320px;
+              input {
+                width: 100%;
+              }
+              ul {
+                left: 56%;
+              }
+            }
+            .allRight {
+              display: none;
+            }
+          }
+          .hamburgerNav {
+            display: block;
+          }
+        }
+        .hamburgerMenu {
+          display: block;
+          .right {
+            display: flex;
+            .allRight {
+              display: flex;
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 965px) {
+        .navTopSection {
+          .left {
+            gap: 30px;
+            ul {
+              gap: 20px;
+              li {
+                a {
+                  span {
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+          }
+          .right {
+            .searchBox {
+              max-width: 280px;
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 887px) {
+        .navTopSection {
+          .left {
+            ul {
+              li {
+                a {
+                  font-size: 20px;
+                  span {
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+          }
+          .hamburgerNav {
+            svg {
+              font-size: 50px;
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 855px) {
+        .navTopSection {
+          .left {
+            flex-grow: 1;
+            ul {
+              max-width: 600px;
+              width: 100%;
+              gap: 35px;
+              li {
+                a {
+                  font-size: 22px;
+                  span {
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+          }
+          .right {
+            display: none;
+          }
+          .hamburgerNav {
+            svg {
+              font-size: 50px;
+            }
+          }
+        }
+        .hamburgerMenu {
+          .right {
+            .searchBox {
+              display: flex;
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 686px) {
+        .navTopSection {
+          .left {
+            flex-grow: unset;
+            gap: 40px;
+            ul {
+              gap: 25px;
+              li {
+                a {
+                  font-size: 22px;
+                  span {
+                    font-size: 16px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .hamburgerMenu {
+          .right {
+            .searchBox {
+              ul {
+                left: 10%;
+                width: 400px;
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 645px) {
+        .navTopSection {
+          .left {
+            ul {
+              li {
+                a {
+                  font-size: 19px;
+                  span {
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 600px) {
+        .navTopSection {
+          .left {
+            gap: 25px;
+            ul {
+              gap: 15px;
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 560px) {
+        .navTopSection {
+          .left {
+            flex-grow: 1;
+            img {
+              width: 120px;
+            }
+            ul {
+              gap: 30px;
+              li {
+                a {
+                  font-size: 25px;
+                  span {
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+          .hamburgerNav {
+            svg {
+              font-size: 40px;
+            }
+          }
+        }
+        .hamburgerMenu {
+          .right {
+            .searchBox {
+              ul {
+                top: 275px;
+                width: 350px;
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 465px) {
+        .navTopSection {
+          .left {
+            justify-content: flex-start;
+            ul {
+              display: none;
+            }
+          }
+          .hamburgerNav {
+            svg {
+              font-size: 40px;
+            }
+          }
+        }
+        .hamburgerMenu {
+          .left {
+            display: flex;
+            ul {
+              display: flex;
+            }
+          }
+        }
+        .hamburgerMenu {
+          .right {
+            .searchBox {
+              ul {
+                top: 340px;
+                left: 15%;
+                width: 280px;
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 390px) {
+        .hamburgerMenu {
+          .left {
+            display: flex;
+            ul {
+              display: flex;
+              gap: 15px;
+              li {
+                a {
+                  font-size: 19px;
+                }
+              }
+            }
+          }
+        }
+        .hamburgerMenu {
+          .right {
+            .searchBox {
+              ul {
+                width: 250px;
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 360px) {
+        .hamburgerMenu {
+          .right {
+            .searchBox {
+              ul {
+                width: 220px;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

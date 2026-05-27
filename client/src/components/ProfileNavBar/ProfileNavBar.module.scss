@@ -1,0 +1,348 @@
+@use "../../global/global.scss" as *;
+
+.sidebar {
+  max-width: 200px;
+  width: 100%;
+  background: #141316;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+  padding: 20px;
+  .profileSection {
+    @include disFlex();
+    flex-direction: column;
+    gap: 10px;
+    .profileSectionMain {
+      @include disFlex();
+      flex-direction: column;
+      gap: 5px;
+      .profileImage {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 2px solid white;
+      }
+      .email {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #aaa;
+      }
+    }
+    .forProfile {
+      @include disFlex();
+      flex-direction: column;
+      gap: 10px;
+      .editButton {
+        background: red;
+        border: none;
+        padding: 8px;
+        text-align: center;
+        font-size: 20px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        cursor: pointer;
+        svg {
+          margin: 0;
+        }
+      }
+      .subscription {
+        font-size: 12px;
+        color: #aaa;
+      }
+      .expiryDate {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+    .forPlans {
+      @include disFlex();
+      margin-top: 60px;
+      gap: 30px;
+      flex-direction: column;
+      .subscription {
+        font-size: 12px;
+        color: #aaa;
+        text-align: center;
+      }
+      .expiryDate {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+  }
+  .navMenu {
+    background-color: inherit;
+    button,
+    a {
+      @include disFlex();
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      transition: 0.3s;
+      flex-direction: column;
+      margin: 20px 0;
+      &.active,
+      &:hover {
+        background: red;
+        border-radius: 10px;
+      }
+    }
+  }
+  .buttons {
+    @include disFlex();
+    gap: 10px;
+    padding: 10px;
+    flex-direction: column;
+    .logout {
+      margin-top: auto;
+      background: none;
+      border: none;
+      color: red;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .deleteAccount {
+      background: black;
+      padding: 10px;
+      border-radius: 20px;
+    }
+  }
+  @media screen and (max-width: 756px) {
+    .profileSection {
+      .profileSectionMain {
+        .profileImage {
+          width: 60px;
+          height: 60px;
+        }
+        .email {
+          font-size: 12px;
+        }
+      }
+    }
+    .navMenu {
+      button,
+      a {
+        padding: 10px;
+      }
+    }
+  }
+  @media screen and (max-width: 555px) {
+    max-width: 130px;
+    padding: 20px 0;
+    .profileSection {
+      .profileSectionMain {
+        .profileImage {
+          width: 50px;
+          height: 50px;
+        }
+        .email {
+          max-width: 80px;
+          word-break: break-word;
+        }
+      }
+      .forProfile {
+        .expiryDate {
+          font-size: 12px;
+        }
+      }
+    }
+    .navMenu {
+      button,
+      a {
+        padding: 5px;
+      }
+    }
+    .buttons {
+      .deleteAccount {
+        font-size: 12px;
+        padding: 3px;
+        padding-left: 5px;
+        svg {
+          font-size: 15px;
+        }
+      }
+      .btnLog {
+        svg {
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+    max-width: 450px;
+    row-gap: 0;
+    align-items: center;
+    .profileSection {
+      gap: 30px;
+      flex-direction: row;
+      .profileSectionMain {
+        .profileImage {
+          width: 70px;
+          height: 70px;
+        }
+        .email {
+          max-width: unset;
+          margin-left: 10px;
+
+        }
+      }
+      .forProfile {
+        .editButton {
+          margin-bottom: 10px;
+        }
+      }
+      .forPlans {
+        .subscription {
+          margin-right: 5px;
+        }
+      }
+    }
+    .navMenu {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      button,
+      a {
+        padding: 10px 20px;
+      }
+    }
+    .buttons {
+      flex-direction: row;
+      gap: 30px;
+      justify-content: center;
+      .deleteAccount {
+        padding: 10px;
+        svg {
+          padding-right: 5px;
+        }
+      }
+      .logout {
+        margin-top: unset;
+      }
+    }
+  }
+  @media screen and (max-width: 360px) {
+    .profileSection {
+      gap: 20px;
+      .profileSectionMain {
+        .profileImage {
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .forProfile {
+        .editButton {
+          padding: 5px;
+        }
+      }
+    }
+    .navMenu {
+      gap: 20px;
+      button,
+      a {
+        padding: 10px;
+      }
+    }
+    .buttons {
+      gap: 15px;
+      .deleteAccount {
+        padding: 10px;
+        svg {
+          margin: 5px;
+        }
+      }
+    }
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+  .modalContent {
+    background: rgb(173, 171, 171);
+    border-radius: 12px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    padding: 100px 2px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    animation: zoomIn 0.3s ease-in-out;
+    color: #141316;
+    p {
+      font-size: 30px;
+      font-weight: bold;
+      color: #333;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .modalButtons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      .yesButton {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        max-width: 200px;
+        width: 100%;
+        cursor: pointer;
+        transition: background 0.3s;
+        &:hover {
+          background: #c0392b;
+        }
+      }
+      .noButton {
+        background: #34495e;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        max-width: 200px;
+        width: 100%;
+        cursor: pointer;
+        transition: background 0.3s;
+        &:hover {
+          background: #2c3e50;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}

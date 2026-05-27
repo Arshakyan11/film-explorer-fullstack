@@ -1,0 +1,390 @@
+@use "../../global/global.scss" as *;
+
+$footer-bg: #111;
+$footer-text: #fff;
+$link-hover: #797979;
+$accent-color: rgb(11, 78, 133);
+
+.footer { 
+  background: $footer-bg;
+  color: $footer-text;
+  padding: 20px 0;
+  .container {
+    max-width: 1440px;
+    margin: auto;
+    padding: 70px;
+    .footerBox {
+      display: flex;
+      justify-content: space-between;
+      .left {
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        .logo {
+          width: 150px;
+          padding-bottom: 40px;
+          cursor: pointer;
+        }
+        .description {
+          font-size: 14px;
+          margin: 10px 0;
+        }
+        .downloadButtons {
+          display: flex;
+          gap: 30px;
+          margin: 10px 0;
+          .appButton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #0e0d0d;
+            color: $footer-text;
+            padding: 10px 15px;
+            border: 1px solid $footer-text;
+            border-radius: 5px;
+            font-size: 14px;
+            max-width: 170px;
+            width: 100%;
+            cursor: pointer;
+            text-align: left;
+            .appIcon {
+              font-size: 24px;
+            }
+            .text {
+              display: flex;
+              flex-direction: column;
+              text-align: left;
+              a {
+                color: $footer-text;
+                transition: color 0.3s ease-in-out;
+                &:hover {
+                  color: $link-hover;
+                }
+
+                .app {
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+        .socialIcons {
+          display: flex;
+          gap: 15px;
+          margin-top: 10px;
+          .iconWrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease-in-out;
+            &:hover {
+              border-color: $accent-color;
+
+              .icon {
+                color: $accent-color;
+              }
+            }
+            .icon {
+              font-size: 24px;
+              color: $footer-text;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      .right {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-evenly;
+        .section {
+          h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            a {
+              color: #ffff;
+            }
+            svg {
+              vertical-align: top;
+            }
+          }
+          ul {
+            list-style: none;
+            padding: 0;
+            h3 {
+              font-size: 18px;
+              margin-bottom: 10px;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+            }
+            li {
+              font-size: 14px;
+              margin-bottom: 5px;
+              color: $link-hover;
+              font-weight: 400;
+              line-height: 140%;
+              cursor: pointer;
+              a {
+                color: $link-hover;
+                font-weight: 500;
+                font-size: 14px;
+                transition: color 0.4s ease-in-out;
+                &:hover {
+                  color: $footer-text;
+                }
+              }
+              &:hover {
+                color: $footer-text;
+              }
+            }
+          }
+          .profileLinks {
+            width: 200px;
+          }
+          .accesingSite {
+            display: flex;
+            gap: 20px;
+            text-align: center;
+            width: 200px;
+          }
+        }
+        .movieAndGames {
+          display: flex;
+          max-width: 500px;
+          width: 100%;
+          justify-content: space-around;
+          .section {
+            h3 {
+              font-size: 18px;
+              margin-bottom: 10px;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              a {
+                color: #ffff;
+              }
+              svg {
+                vertical-align: top;
+              }
+            }
+            ul {
+              list-style: none;
+              padding: 0;
+              h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+              }
+              li {
+                font-size: 14px;
+                margin-bottom: 5px;
+                color: $link-hover;
+                font-weight: 400;
+                line-height: 140%;
+                cursor: pointer;
+                a {
+                  color: $link-hover;
+                  font-weight: 500;
+                  font-size: 14px;
+                  transition: color 0.4s ease-in-out;
+                  &:hover {
+                    color: $footer-text;
+                  }
+                }
+                &:hover {
+                  color: $footer-text;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .footerBottom {
+      display: flex;
+      text-align: left;
+      margin-top: 20px;
+      font-size: 14px;
+      color: $link-hover;
+      flex-wrap: wrap;
+      a,
+      p {
+        margin-right: 10px;
+        color: $link-hover;
+        transition: color 0.3s ease-in-out;
+        &:hover {
+          color: $footer-text;
+        }
+      }
+    }
+    @media screen and (max-width: 1072px) {
+      .footerBox {
+        .right {
+          gap: 50px;
+        }
+      }
+    }
+    @media screen and (max-width: 1024px) {
+      .footerBox {
+        .right {
+          .section {
+            .accesingSite {
+              width: 100px;
+            }
+            .profileLinks {
+              width: 100px;
+            }
+            .accesingSite {
+              flex-direction: column;
+              gap: 0px;
+            }
+          }
+          .movieAndGames {
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 930px) {
+      padding: 35px;
+      .footerBox {
+        .right {
+          flex-wrap: wrap;
+          gap: 10px;
+          .movieAndGames {
+            padding: 0 20px;
+            gap: 40px;
+            justify-content: flex-end;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 665px) {
+      padding: 15px;
+    }
+    @media screen and (max-width: 636px) {
+      padding: 15px;
+      .footerBox {
+        .left {
+          .downloadButtons {
+            flex-wrap: wrap;
+            .appButton {
+              max-width: 220px;
+            }
+          }
+          .description {
+            font-size: 13px;
+          }
+          .socialIcons {
+            .iconWrapper {
+              width: 33px;
+              height: 33px;
+            }
+          }
+        }
+        .right {
+          flex-wrap: wrap;
+          gap: 10px;
+          .movieAndGames {
+            padding: 0 20px;
+            justify-content: space-evenly;
+          }
+        }
+      }
+      .footerBottom {
+        font-size: 12px;
+      }
+      .fotterBottomFirst {
+        max-width: 250px;
+      }
+    }
+    @media screen and (max-width: 555px) {
+      .footerBox {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        .right {
+          order: 1;
+          .section {
+            .accesingSite {
+              width: 200px;
+            }
+            .profileLinks {
+              width: 200px;
+            }
+            .accesingSite {
+              flex-direction: row;
+              gap: 20px;
+            }
+          }
+        }
+        .left {
+          order: 2;
+          align-items: center;
+          .logo {
+            padding-bottom: 0;
+          }
+          .description {
+            font-size: 16px;
+            text-align: center;
+          }
+          .downloadButtons {
+            .appButton {
+              max-width: 600px;
+              margin: auto;
+            }
+          }
+          .socialIcons {
+            gap: 30px;
+            .iconWrapper {
+              width: 44px;
+              height: 44px;
+            }
+          }
+        }
+      }
+      .footerBottom {
+        justify-content: center;
+      }
+      .fotterBottomFirst {
+        margin: auto;
+        margin-top: 20px;
+        max-width: 350px;
+        justify-content: center;
+      }
+    }
+    @media screen and (max-width: 415px) {
+      .footerBox {
+        .right{
+          .movieAndGames{
+            .section{
+              ul{
+                li{
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+        .left {
+          .downloadButtons {
+            .appButton {
+              margin: 0 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

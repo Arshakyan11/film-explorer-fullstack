@@ -1,0 +1,75 @@
+@use "../../global/global.scss" as *;
+
+.movieS {
+  @include backImage();
+  .container {
+    max-width: 1440px;
+    margin: auto;
+    .movieSection {
+      padding: 20px 0;
+      .movieBox {
+        padding: 0 20px;
+        .movieSection_info {
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          align-items: center;
+          gap: 10px;
+          max-width: 700px;
+          margin: auto;
+          height: 400px;
+          background: url("../../../img/forFilms.webp");
+          background-size: contain;
+          border-radius: 20px;
+          .movieSection_info_text {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            h2 {
+              color: #e3b505;
+              font-size: 40px;
+              font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+                "Helvetica Neue", sans-serif;
+              text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.6);
+            }
+            p {
+              color: white;
+              font-size: 20px;
+              color: gold;
+              color: #d3d3d3;
+              max-height: 90px;
+              overflow: hidden;
+              font-family: "Trebuchet MS", "Lucida Sans Unicode",
+                "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+            }
+          }
+          img {
+            width: 180px;
+            padding: 5px;
+            height: 100px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 12px rgba(255, 215, 0, 0.8);
+          }
+        }
+        @media screen and (max-width: 855px) {
+          .movieSection_info {
+            max-width: 600px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            .movieSection_info_text {
+              h2 {
+                font-size: 30px;
+              }
+              p {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

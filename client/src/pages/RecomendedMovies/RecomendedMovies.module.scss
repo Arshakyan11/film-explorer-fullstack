@@ -1,0 +1,9 @@
+@use "../../global/global.scss" as *;
+
+.reccomendedM {
+  @include backImage();
+  .container {
+    max-width: 1440px;
+    margin: auto;
+  }
+}

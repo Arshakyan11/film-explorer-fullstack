@@ -1,0 +1,472 @@
+.sectionProfile {
+  background: linear-gradient(to right, #1c1b1f, #2c2b30);
+  .container {
+    display: flex;
+    color: white;
+    max-width: 1440px;
+    margin: auto;
+    svg {
+      margin: 10px;
+    }
+    main {
+      border-right: 1px solid rgb(70, 58, 58);
+    }
+    .mainContent {
+      flex: 1;
+      padding: 40px;
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      .plansList {
+        display: flex;
+        flex-direction: column;
+        .planItem {
+          background: #141316;
+          padding: 15px;
+          margin: 10px 0;
+          border-radius: 15px;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          transition: 0.3s;
+          &:hover {
+            background: #82413f;
+          }
+        }
+        .selected {
+          background: #d9534f;
+        }
+      }
+      .renewSection {
+        display: flex;
+        justify-content: right;
+        column-gap: 10px;
+        align-items: center;
+        margin-top: 20px;
+        padding-right: 10px;
+      }
+      .renewButton {
+        background: #d9534f;
+        border: none;
+        color: #fff;
+        padding: 10px 20px;
+
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+        &:hover {
+          background: #c9302c;
+        }
+      }
+      .total {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .upgradeSection {
+        display: flex;
+        flex-direction: column;
+        background: #000000;
+        padding: 30px;
+        border-radius: 10px;
+        margin-top: 40px;
+        text-align: left;
+        .plansList2 {
+          display: flex;
+          flex-direction: row;
+          gap: 0;
+          .planItem2 {
+            background: #3a3a3a;
+            padding: 5px 25px;
+            margin-top: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+            color: #fff;
+            position: relative;
+            min-width: 200px;
+            font-weight: bold;
+            span {
+              margin-left: 5px;
+            }
+          }
+          .planItem2:first-child {
+            clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%);
+          }
+          .planItem2:not(:first-child) {
+            clip-path: polygon(
+              0% 0%,
+              95% 0%,
+              100% 50%,
+              95% 100%,
+              0% 100%,
+              5% 50%
+            );
+            margin-left: -5px;
+            background: #555;
+          }
+          .planItem2:last-child {
+            border-radius: 0 15px 15px 0;
+          }
+          .planItem2:hover {
+            background: #82413f;
+          }
+          .selected2 {
+            background: #d9534f !important;
+          }
+        }
+        .upgradeSectionMain {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .upgradeDetails {
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            img {
+              padding: 50px 0 10px 0;
+              width: 150px;
+            }
+            h3 {
+              font-size: 20px;
+              padding: 10px 0;
+            }
+            .tvMain {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+              width: 100%;
+              gap: 10px;
+              margin-top: 20px;
+              .tv {
+                background-color: #c8c8c8;
+                text-align: center;
+                max-width: 550px;
+                height: 180px;
+                display: flex;
+                align-items: center;
+                border: solid black;
+                border-radius: 20px;
+                overflow: hidden;
+                img {
+                  padding: 20px;
+                  width: 100%;
+                }
+              }
+              .tvTotal {
+                width: 300px;
+                height: 180px;
+                background-color: #353535;
+                border: solid #353535;
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .total2 {
+                  font-size: 80px;
+                }
+                .tvBtn {
+                  width: 150px;
+                  font-size: 15px;
+                  background-color: #d9534f;
+                  border: solid #d9534f;
+                  padding: 5px;
+                  border-radius: 20px;
+                  color: white;
+                  margin-top: 10px;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+          .verticalLine {
+            width: 1px;
+            background-color: #ffffff;
+            height: 450px;
+            margin: 0 20px;
+          }
+          .paymentMethods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .total {
+              margin-top: 100px;
+              padding: 20px 0;
+              .totalText {
+                padding: 20px 5px;
+                display: flex;
+                justify-content: space-between;
+              }
+            }
+            .pay {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              width: 200px;
+              background: #ffffff;
+              border: solid #c9302c;
+              color: #000000;
+              padding: 10px 10px;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: 0.3s;
+              font-weight: bolder;
+              img {
+                width: 50px;
+              }
+              &:hover {
+                border-color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 1345px) {
+      .mainContent {
+        .upgradeSection {
+          .upgradeSectionMain {
+            .upgradeDetails {
+              .tvMain {
+                .tvTotal {
+                  .total2 {
+                    font-size: 60px;
+                  }
+                  .tvBtn {
+                    width: 120px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 1200px) {
+      .mainContent {
+        .upgradeSection {
+          .plansList2 {
+            margin-bottom: 40px;
+          }
+          .upgradeSectionMain {
+            .upgradeDetails {
+              .tvMain {
+                .tv {
+                  img {
+                    padding: 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 1105px) {
+      .mainContent {
+        .upgradeSection {
+          .upgradeSectionMain {
+            .upgradeDetails {
+              .tvMain {
+                .tvTotal {
+                  .total2 {
+                    font-size: 50px;
+                  }
+                  .tvBtn {
+                    width: 120px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 1050px) {
+      .mainContent {
+        .upgradeSection {
+          .plansList2 {
+            margin-bottom: 0px;
+            .planItem2 {
+              padding: 5px 20px;
+            }
+          }
+          .upgradeSectionMain {
+            .upgradeDetails {
+              img {
+                padding: 20px 0;
+              }
+              .tvMain {
+                .tv {
+                  img {
+                    object-fit: cover;
+                    height: 100%;
+                  }
+                }
+                .tvTotal {
+                  width: 250px;
+                  .total2 {
+                    font-size: 40px;
+                  }
+                  .tvBtn {
+                    width: 100px;
+                    padding: 5px 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 966px) {
+      .mainContent {
+        .upgradeSection {
+          .plansList2 {
+            .planItem2 {
+              padding: 5px 10px;
+            }
+          }
+          .upgradeSectionMain {
+            flex-direction: column;
+            .upgradeDetails {
+              .tvMain {
+                .tvTotal {
+                  .total2 {
+                    font-size: 50px;
+                  }
+                  .tvBtn {
+                    width: 120px;
+                  }
+                }
+              }
+            }
+            .verticalLine {
+              width: 100%;
+              height: 5px;
+              margin: 20px 0;
+            }
+            .paymentMethods {
+              .total {
+                margin-top: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 920px) {
+      .mainContent {
+        padding: 20px;
+        .upgradeSection {
+          .plansList2 {
+            flex-wrap: wrap;
+            column-gap: 20px;
+            .planItem2 {
+              margin-top: 10px;
+              padding: 5px 20px;
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 745px) {
+      .mainContent {
+        .upgradeSection {
+          .plansList2 {
+            flex-direction: column;
+            gap: 10px;
+          }
+          .upgradeSectionMain {
+            flex-direction: column;
+            .upgradeDetails {
+              .tvMain {
+                .tvTotal {
+                  .total2 {
+                    font-size: 40px;
+                  }
+                  .tvBtn {
+                    width: 100px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 585px) {
+      .mainContent {
+        .upgradeSection {
+          .upgradeSectionMain {
+            flex-direction: column;
+            .upgradeDetails {
+              .tvMain {
+                flex-wrap: wrap;
+                .tvTotal {
+                  height: 130px;
+                  .total2 {
+                    font-size: 60px;
+                  }
+                  .tvBtn {
+                    width: 150px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 490px) {
+      .mainContent {
+        padding: 10px;
+        .upgradeSection {
+          .upgradeSectionMain {
+            .upgradeDetails {
+              .tvMain {
+                .tvTotal {
+                  height: 110px;
+                  .total2 {
+                    font-size: 40px;
+                  }
+                  .tvBtn {
+                    width: 150px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 480px) {
+      .mainContent {
+        padding: 10px;
+        .upgradeSection {
+          padding: 20px;
+          .upgradeSectionMain {
+          }
+        }
+      }
+    }
+        @media screen and (max-width: 450px) {
+      flex-direction: column;
+      .mainContent {
+        .upgradeSection {
+          .upgradeSectionMain {
+          }
+        }
+      }
+    }
+  }
+}

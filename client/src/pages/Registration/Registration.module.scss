@@ -1,0 +1,211 @@
+@use "../../global/global.scss" as *;
+section {
+  .registrationSec {
+    background: url("../../../img/backgroundi.jpg");
+    background-position: center;
+    @include disFlex();
+    flex-direction: column;
+    gap: 50px;
+    padding: 20px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    a {
+      background: linear-gradient(45deg, #444, #666);
+      color: red;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s;
+      &:hover {
+        background: linear-gradient(45deg, #666, #888);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+      }
+    }
+    .formBox {
+      max-width: 684px;
+      width: 100%;
+      padding: 60px;
+      border-radius: 23px;
+      background: rgba(0, 0, 0, 0.6);
+      @include disFlex();
+      flex-direction: column;
+      gap: 22px;
+      .titleofBox {
+        font-size: 24px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 24px;
+        color: #ff4d6d;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 8px 16px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+        backdrop-filter: blur(4px);
+        display: inline-block;
+      }
+      form {
+        @include disFlex();
+        flex-direction: column;
+        gap: 14px;
+        width: 100%;
+        fieldset {
+          max-width: 426px;
+          width: 100%;
+          border: none;
+          position: relative;
+          .showHide {
+            color: rgb(47, 47, 152);
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            padding: 10px;
+            border-radius: 20px;
+            color: white;
+            font-size: 30px;
+          }
+          legend {
+            color: red;
+            padding-left: 5px;
+          }
+        }
+        input {
+          border-radius: 8px;
+          padding: 20px;
+          width: 100%;
+          outline: none;
+          border: none;
+          background: rgba(49, 49, 49, 0.9);
+          color: white;
+          font-size: 20px;
+          &::placeholder {
+            font-weight: 400;
+            font-size: 16px;
+          }
+        }
+        .btns {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+          max-width: 300px;
+          width: 100%;
+          button,
+          a {
+            padding: 10px 34px;
+            border-radius: 60px;
+            background: #e13c52;
+            font-weight: 500;
+            font-size: 24px;
+            text-align: center;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: all 0.5s;
+            margin-top: 10px;
+            &:hover {
+              background-color: white;
+              color: #e13c52;
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 765px) {
+      .formBox {
+        max-width: 500px;
+      }
+    }
+    @media screen and (max-width: 575px) {
+      .formBox {
+        max-width: 450px;
+        margin: 0 20px;
+        .titleofBox {
+          font-size: 22px;
+        }
+        form {
+          fieldset {
+            max-width: 330px;
+            .showHide {
+              top: -3px;
+            }
+            input {
+              padding: 10px 20px;
+            }
+          }
+          .btns {
+            button,
+            a {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 510px) {
+      .formBox {
+        padding: 30px;
+        max-width: 400px;
+        .titleofBox {
+          font-size: 18px;
+        }
+      }
+    }
+    @media screen and (max-width: 450px) {
+      .formBox {
+        max-width: 350px;
+        padding: 40px;
+        form {
+          fieldset {
+            .showHide {
+              top: -2px;
+              font-size: 25px;
+            }
+          }
+          .btns {
+            button,
+            a {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 396px) {
+      .formBox {
+        max-width: 300px;
+        padding: 25px;
+        .titleofBox {
+          margin-bottom: 5px;
+        }
+      }
+    }
+    @media screen and (max-width: 340px) {
+      .formBox {
+        max-width: 280px;
+        .titleofBox {
+          font-size: 16px;
+        }
+        form {
+          fieldset {
+            .showHide {
+              top: 2px;
+              font-size: 20px;
+            }
+          }
+          .btns {
+            button,
+            a {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

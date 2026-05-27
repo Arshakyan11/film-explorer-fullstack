@@ -1,0 +1,325 @@
+@use "../../global/global.scss" as *;
+
+section {
+  .eachFilmSection {
+    padding: 20px;
+    background: url("../../../img/black2.jpg");
+    background-repeat: none;
+    background-size: cover !important;
+    min-height: 650px;
+    background-position: 20% 80%;
+    @include disFlex();
+    flex-direction: column;
+    gap: 20px;
+    a {
+      background: linear-gradient(45deg, #444, #666);
+      color: red;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s;
+      &:hover {
+        background: linear-gradient(45deg, #666, #888);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+      }
+    }
+    .eachFilmSection_data {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      display: flex;
+      gap: 50px;
+      border-radius: 20px;
+      color: white;
+      border: 3px solid black;
+      background: rgba(14, 14, 14, 0.9);
+      box-shadow: 0px 2px 2px rgba(255, 140, 0, 0.5);
+      span {
+        text-transform: capitalize;
+        margin-right: 8px;
+      }
+      .eachBox_left {
+        .img1 {
+          width: 200px;
+          height: 300px;
+          border-radius: 20px;
+        }
+        .oneLine {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          flex-direction: column;
+          font-size: 21px;
+          .left_Title {
+            display: flex;
+            flex-direction: column;
+            max-width: 200px;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+            gap: 5px;
+            span {
+              color: goldenrod;
+            }
+          }
+          .right_language {
+            text-transform: uppercase;
+          }
+          .right_release {
+            margin: 5px 0;
+          }
+          .filmsLineSection_eachBox_info_starBox {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            .starBox_bottom {
+              @include disFlex();
+              gap: 5px;
+              h4 {
+                color: gold;
+              }
+              .starImg {
+                width: 25px;
+                height: 25px;
+              }
+            }
+          }
+        }
+        .right_overview {
+          display: none;
+          margin: 15px 0;
+          font-size: 20px;
+          line-height: 1.2;
+          max-width: 600px;
+          color: rgb(159, 159, 159);
+        }
+      }
+      .eachBox_right {
+        @include disFlex();
+        flex-direction: column;
+        gap: 8px;
+        .right_overview {
+          margin: 15px 0;
+          font-size: 22px;
+          line-height: 1.2;
+          max-width: 600px;
+          text-align: justify;
+          color: rgb(159, 159, 159);
+        }
+        .iframe {
+          width: 100%;
+          min-height: 300px;
+        }
+      }
+      .right_voteCount {
+        font-size: 14px;
+        margin: 5px 0;
+        font-size: 27px;
+        color: #ff4d4d;
+      }
+      .img2 {
+        width: 300px;
+      }
+    }
+    @media screen and (max-width: 865px) {
+      padding: 20px 30px;
+      .eachFilmSection_data {
+        .eachBox_left {
+          .img1 {
+            width: 180px;
+            object-fit: cover;
+          }
+          .oneLine {
+            .left_Title {
+              font-size: 17px;
+            }
+            font-size: 18px;
+          }
+        }
+        .eachBox_right {
+          justify-content: space-evenly;
+          .iframe {
+            min-height: 200px;
+          }
+          .right_overview {
+            font-size: 18px;
+            line-height: 25px;
+          }
+          .right_voteCount {
+            font-size: 22px;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 685px) {
+      .eachFilmSection_data {
+        .eachBox_left {
+          .oneLine {
+            font-size: 17px;
+          }
+        }
+        .eachBox_right {
+          .right_overview {
+            font-size: 17px;
+          }
+          .right_voteCount {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 660px) {
+      .eachFilmSection_data {
+        flex-direction: column;
+        align-items: flex-start;
+        .eachBox_left {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          .eachBoxMainLeft {
+            display: flex;
+            gap: 30px;
+            .oneLine {
+              font-size: 20px;
+            }
+          }
+          .right_overview {
+            display: block;
+            text-align: justify;
+            margin-bottom: 0;
+          }
+        }
+        .eachBox_right {
+          align-self: center;
+          width: 100%;
+          .right_overview {
+            display: none;
+            padding-top: 0;
+          }
+          .right_voteCount {
+            font-size: 25px;
+          }
+          .iframe {
+            max-width: 400px;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 540px) {
+      .eachFilmSection_data {
+        gap: 20px;
+        .eachBox_left {
+          .eachBoxMainLeft {
+            gap: 15px;
+            .img1 {
+              width: 150px;
+            }
+          }
+          .right_overview {
+            padding: 0 4px;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 504px) {
+      .eachFilmSection_data {
+        .eachBox_left {
+          gap: 10px;
+        }
+        .eachBox_right {
+          .right_voteCount {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 460px) {
+      .eachFilmSection_data {
+        .eachBox_left {
+          .eachBoxMainLeft {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .img1 {
+              width: 250px;
+              height: 200px;
+            }
+            .oneLine {
+              font-size: 18px;
+              .left_Title {
+                flex-direction: row;
+                font-size: 20px;
+                h3 {
+                  font-size: 20px;
+                }
+              }
+            }
+          }
+          .right_overview {
+            padding: 0 20px;
+            font-size: 18px;
+            text-align: center;
+          }
+        }
+        .eachBox_right {
+          .right_voteCount {
+            font-size: 18px;
+          }
+          .iframe {
+            max-width: 270px;
+            min-height: 100px;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 385px) {
+      .eachFilmSection_data {
+        .eachBox_left {
+          .eachBoxMainLeft {
+            .img1 {
+              width: 175px;
+              height: 200px;
+            }
+            .oneLine {
+              font-size: 16px;
+              .left_Title {
+                flex-direction: row;
+                font-size: 18px;
+                h3 {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+          .right_overview {
+            padding: 0 20px;
+            font-size: 16px;
+          }
+        }
+        .eachBox_right {
+          .iframe {
+            max-width: 230px;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 345px) {
+      .eachFilmSection_data {
+        .eachBox_right {
+          .iframe {
+            max-width: 210px;
+          }
+          .right_voteCount {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

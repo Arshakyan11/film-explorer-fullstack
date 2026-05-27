@@ -1,0 +1,313 @@
+@use "../../global/global.scss" as *;
+.sectionWatchlist {
+  background: linear-gradient(to right, #1c1b1f, #2c2b30);
+  .container {
+    display: flex;
+    max-width: 1440px;
+    margin: auto;
+    .watchlist {
+      display: flex;
+      text-align: center;
+      flex-direction: column;
+      width: 100%;
+      flex-wrap: wrap;
+      background: linear-gradient(to right, #1c1b1f, #2c2b30);
+      gap: 20px;
+      padding: 20px;
+      p {
+        font-size: 30px;
+        color: #00ffd5;
+        padding: 20px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        background: linear-gradient(
+          45deg,
+          rgba(30, 30, 30, 0.9),
+          rgba(70, 70, 70, 0.9)
+        );
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          color: #ffffff;
+          background: linear-gradient(
+            45deg,
+            rgba(50, 50, 50, 1),
+            rgba(90, 90, 90, 1)
+          );
+          transform: scale(1.01);
+          box-shadow: 0px 4px 10px rgba(0, 255, 213, 0.3);
+        }
+      }
+      .watchlistBox {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        .eachWatchlistBox {
+          @include disFlex();
+          flex-direction: column;
+          justify-content: unset;
+          gap: 6px;
+          max-width: 248px;
+          width: 100%;
+          height: 550px;
+          background: rgba(20, 20, 20, 0.85);
+          padding: 12px;
+          overflow: hidden;
+          border-radius: 14px;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+          cursor: pointer;
+          position: relative;
+          transition: all 0.4s ease-in-out;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          img {
+            height: 285px;
+            width: 100%;
+            border-radius: 14px 14px 0 0;
+            transition: transform 0.4s;
+          }
+          .watchlistTextBox {
+            text-align: center;
+            flex-direction: column;
+            @include disFlex();
+            gap: 6px;
+            justify-content: unset;
+            margin-top: 10px;
+            span {
+              color: #00ffd5;
+              padding-bottom: 2px;
+              font-size: 14px;
+              font-weight: 500;
+            }
+            h3 {
+              color: white;
+              font-family: "Poppins", sans-serif;
+              font-size: 16px;
+              font-weight: 700;
+              letter-spacing: 0.5px;
+            }
+            a,
+            button {
+              background: linear-gradient(
+                45deg,
+                rgba(30, 30, 30, 0.9),
+                rgba(70, 70, 70, 0.9)
+              );
+              color: #00ffd5;
+              font-size: 18px;
+              font-weight: bold;
+              padding: 12px 22px;
+              border-radius: 8px;
+              cursor: pointer;
+              transition:
+                opacity 0.3s,
+                transform 0.3s;
+              max-width: 170px;
+              width: 100%;
+            }
+            .link1 {
+              position: absolute;
+              bottom: 70px;
+              left: 38px;
+              transform: translate(0px, -10px);
+            }
+            .link2 {
+              position: absolute;
+              bottom: 10px;
+              font-size: 15px;
+              opacity: 1;
+              color: wheat;
+            }
+          }
+          &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 255, 213, 0.4);
+            border: 1px solid rgba(0, 255, 213, 0.5);
+            img {
+              filter: brightness(1.3);
+            }
+            h3 {
+              color: #00ffd5;
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 1366px) {
+        .watchlistBox {
+          gap: 17px;
+          .eachWatchlistBox {
+            &:hover {
+              transform: scale(1.05);
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 1306px) {
+        .watchlistBox {
+          .eachWatchlistBox {
+            max-width: 200px;
+            height: 450px;
+            img {
+              height: 200px;
+            }
+            .watchlistTextBox {
+              h3 {
+                font-size: 14px;
+              }
+              .link1 {
+                left: 15px;
+                font-size: 15px;
+              }
+              .link2 {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 1072px) {
+        p {
+          font-size: 25px;
+        }
+      }
+      @media screen and (max-width: 896px) {
+        .watchlistBox {
+          .eachWatchlistBox {
+            max-width: 170px;
+            height: 450px;
+            .watchlistTextBox {
+              h3 {
+                font-size: 14px;
+              }
+              .link1 {
+                left: 10px;
+                font-size: 15px;
+                max-width: 150px;
+              }
+              .link2 {
+                font-size: 13px;
+                padding: 12px;
+                max-width: 150px;
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 613px) {
+        p {
+          font-size: 20px;
+        }
+        .watchlistBox {
+          .eachWatchlistBox {
+            max-width: 140px;
+            height: 450px;
+            img {
+            }
+            .watchlistTextBox {
+              h3 {
+                font-size: 12px;
+              }
+              .link1 {
+                left: 10px;
+                font-size: 11px;
+                max-width: 120px;
+              }
+              .link2 {
+                font-size: 11px;
+                padding: 12px;
+                max-width: 120px;
+              }
+            }
+          }
+        }
+      }
+      @media screen and (max-width: 484px) {
+        p {
+          font-size: 20px;
+        }
+        .watchlistBox {
+          .eachWatchlistBox {
+            max-width: 120px;
+            height: 400px;
+            img {
+              height: 150px;
+            }
+            .watchlistTextBox {
+              h3 {
+                font-size: 12px;
+              }
+              .link1 {
+                font-size: 10px;
+                max-width: 100px;
+                padding: 12px 0;
+              }
+              .link2 {
+                font-size: 10px;
+                max-width: 100px;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 450px) {
+      flex-direction: column;
+      .watchlist {
+        .watchlistBox {
+          .eachWatchlistBox {
+            max-width: 170px;
+            height: 450px;
+            img {
+              height: 200px;
+            }
+            .watchlistTextBox {
+              h3 {
+                font-size: 14px;
+              }
+              .link1 {
+                left: 15px;
+                font-size: 14px;
+                max-width: 140px;
+                padding: 12px 0;
+              }
+              .link2 {
+                font-size: 12px;
+                max-width: 140px;
+              }
+            }
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 413px) {
+      flex-direction: column;
+      .watchlist {
+        .watchlistBox {
+          .eachWatchlistBox {
+            max-width: 130px;
+            height: 400px;
+            img {
+              height: 150px;
+            }
+            .watchlistTextBox {
+              h3 {
+                font-size: 12px;
+              }
+              .link1 {
+                left: 10px;
+                font-size: 11px;
+                max-width: 110px;
+                padding: 12px 0;
+              }
+              .link2 {
+                font-size: 10px;
+                max-width: 110px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

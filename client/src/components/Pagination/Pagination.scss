@@ -1,0 +1,31 @@
+.btns {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  gap: 5px;
+  max-width: 734px;
+  flex-wrap: wrap;
+  margin: auto;
+  button {
+    padding: 20px;
+    background-color: rgb(13, 13, 13);
+    color: white;
+    transition: all 0.5s;
+    cursor: pointer;
+    &:active {
+      color: red;
+    }
+  }
+  .arrows {
+  }
+  @media screen and (max-width: 765px) {
+    button {
+      padding: 15px;
+    }
+  }
+  @media screen and (max-width: 630px) {
+    button {
+      padding: 13px;
+    }
+  }
+}

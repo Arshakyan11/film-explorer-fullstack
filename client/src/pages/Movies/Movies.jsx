@@ -7,10 +7,9 @@ import {
   RECOMENDED_MOVIES,
 } from "../../store/types/paginationTypes";
 import { useDispatch, useSelector } from "react-redux";
-import { gettingGlobal } from "../../store/selectors/allDataSelector";
-import { gettingAllDataOnly } from "../../store/actions/allDataAction";
-
 import styles from "./Movies.module.scss";
+import { gettingGlobal } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
+import { getFilmByWantedPageThunk } from "../../store/api/api";
 
 const Movies = () => {
   let forMoviesOnly = true;
@@ -18,7 +17,12 @@ const Movies = () => {
   let { data, currentID } = useSelector(gettingGlobal);
   data = data.mainData;
   useEffect(() => {
-    dispatch(gettingAllDataOnly(7, 11324));
+    dispatch(
+      getFilmByWantedPageThunk({
+        pageArgument: 7,
+        idArgument: 11324,
+      }),
+    );
   }, []);
 
   return (

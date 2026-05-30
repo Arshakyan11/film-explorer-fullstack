@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import paginationReducer from "./paginationReducer";
 import { EachFilmReducer } from "./EachFilmReducer";
-import { allDataReducer } from "./allDataReducer";
+import allDataReducer from "../AllFilmDataSlice/AllFilmDataSlice.ts";
 import { registrationReducer } from "./registrationReducer";
 import { loginReducer } from "./loginReducer";
 import { plansReducer } from "./plansReducer";
@@ -12,7 +12,7 @@ import { searchingEachReducer } from "./searchingEachReducer";
 const reducers = combineReducers({
   pagination: paginationReducer,
   databyPages: EachFilmReducer,
-  allData: allDataReducer,
+  allFilmsData: allDataReducer,
   registration: registrationReducer,
   login: loginReducer,
   plans: plansReducer,

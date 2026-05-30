@@ -1,5 +1,4 @@
 import { ROUTES } from "../../routes/Routes";
-import { LocalAxios } from "../api/api";
 import { makeUserData } from "./plansActions";
 import {
   LOGIN_ERROR,
@@ -7,6 +6,7 @@ import {
   LOGIN_SEEPASSWORD,
 } from "../types/loginTypes";
 import { notifyForSmth, notifyForSmthBad } from "../../helpers/notifyUser";
+import { LocalAxios } from "../api/api";
 
 export const loginGetting = (personName, passwordd, navigate) => {
   return (dispatch) => {

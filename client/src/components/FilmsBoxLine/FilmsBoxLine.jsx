@@ -5,10 +5,10 @@ import { ROUTES } from "../../routes/Routes";
 import { useDispatch, useSelector } from "react-redux";
 import { paginationGetting } from "../../store/actions/paginationAction";
 import { globalPagination } from "../../store/selectors/paginationSelectors";
-import { gettingAllDataOnly } from "../../store/actions/allDataAction";
 
 import styles from "./FilmsBoxLine.module.scss";
 import { watchlistAddingToUser } from "../../store/actions/watchlistAction";
+import { getFilmByWantedPageThunk } from "../../store/api/api";
 
 const FilmsBoxLine = ({
   moviesCategory,
@@ -44,7 +44,13 @@ const FilmsBoxLine = ({
                 key={elm.id}
                 className={styles.filmsLineSection_eachBox}
                 onClick={() =>
-                  forMoviesOnly && dispatch(gettingAllDataOnly(7, elm.id))
+                  forMoviesOnly &&
+                  dispatch(
+                    getFilmByWantedPageThunk({
+                      pageArgument: 31,
+                      idArgument: elm.id,
+                    }),
+                  )
                 }
               >
                 <img
@@ -79,7 +85,7 @@ const FilmsBoxLine = ({
                             id: elm.id,
                             title: elm.original_title,
                             img: elm.poster_path,
-                          })
+                          }),
                         );
                       }}
                       className={styles.link2}

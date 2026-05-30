@@ -2,20 +2,18 @@ import React, { useEffect } from "react";
 import { star } from "../Images";
 import { Link, NavLink } from "react-router-dom";
 import Pagination from "../Pagination/Pagination";
-import {
-  gettingAllDataOnly,
-  sendingData,
-} from "../../store/actions/allDataAction";
+
 import { useDispatch, useSelector } from "react-redux";
+import { watchlistAddingToUser } from "../../store/actions/watchlistAction";
+import "./AllFilmsSorted.scss";
+import { ROUTES } from "../../routes/Routes";
 import {
   gettingCurrentPage,
   gettingDataPage,
   gettingUserData,
-} from "../../store/selectors/allDataSelector";
-import { watchlistAddingToUser } from "../../store/actions/watchlistAction";
-
-import "./AllFilmsSorted.scss";
-import { ROUTES } from "../../routes/Routes";
+  sendingData,
+} from "../../store/AllFilmDataSlice/AllFilmDataSlice";
+import { getFilmByWantedPageThunk } from "../../store/api/api";
 
 const AllFilmsSorted = ({ idByPagesMovies = 1 }) => {
   const isLogged = useSelector(gettingUserData);
@@ -23,7 +21,11 @@ const AllFilmsSorted = ({ idByPagesMovies = 1 }) => {
   const data = useSelector(gettingDataPage);
   const currentPage = useSelector(gettingCurrentPage);
   useEffect(() => {
-    dispatch(gettingAllDataOnly(idByPagesMovies));
+    dispatch(
+      getFilmByWantedPageThunk({
+        pageArgument: idByPagesMovies,
+      }),
+    );
     dispatch(sendingData(JSON.parse(localStorage.getItem("usersInfo"))));
   }, []);
 

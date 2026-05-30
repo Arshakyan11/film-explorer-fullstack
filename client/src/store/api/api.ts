@@ -1,5 +1,12 @@
 import axios from "axios";
 import { notifyforAdding, notifyforisExisting } from "../../helpers/notifyUser";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getFilmByWantedPageService } from "../../services/films.service";
+import type {
+  GetFilmByWantedPageReqType,
+  GetFilmByWantedPageThunkTType,
+} from "../../types/apiHandlingTypes";
+import { extractErrorMessage } from "../../services/instance";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_FILM_MAIN_URL,
@@ -9,7 +16,48 @@ const instance = axios.create({
     Authorization: import.meta.env.VITE_FILM_TOKEN,
   },
 });
-console.log(import.meta.env.VITE_FILM_MAIN_URL);
+
+export const getFilmByWantedPageThunk = createAsyncThunk<
+  GetFilmByWantedPageThunkTType,
+  GetFilmByWantedPageReqType,
+  {
+    rejectValue: string;
+  }
+>(
+  "allFilmsData/getFilmByWantedPageThunk",
+  async ({ pageArgument, idArgument }, { rejectWithValue }) => {
+    try {
+      const res = await getFilmByWantedPageService(pageArgument);
+      return {
+        data: res.results,
+        currentPage: pageArgument,
+        currentID: idArgument ?? 278,
+      };
+    } catch (error) {
+      return rejectWithValue(
+        extractErrorMessage(error, "Error while getting Film Data"),
+      );
+    }
+  },
+);
+
+export const getFooterDataThunk = createAsyncThunk<
+  any[],
+  number,
+  { rejectValue: string }
+>(
+  "allFilmsData/getFooterDataThunk",
+  async (pageArgument, { rejectWithValue }) => {
+    try {
+      const res = await getFilmByWantedPageService(pageArgument);
+      return res.results;
+    } catch (error) {
+      return rejectWithValue(
+        extractErrorMessage(error, "Error while getting Film Data for footer"),
+      );
+    }
+  },
+);
 
 export const Axios = {
   getFromFirstPage() {

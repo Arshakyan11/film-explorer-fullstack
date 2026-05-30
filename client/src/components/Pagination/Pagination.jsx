@@ -1,7 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { gettingAllDataOnly } from "../../store/actions/allDataAction";
-
 import "./Pagination.scss";
 
 const Pagination = ({ currentPage, idByPages = 1 }) => {
@@ -12,7 +10,13 @@ const Pagination = ({ currentPage, idByPages = 1 }) => {
       <button
         className="arrows"
         disabled={currentPage === idByPages}
-        onClick={() => dispatch(gettingAllDataOnly(currentPage - 1))}
+        onClick={() =>
+          dispatch(
+            getFilmByWantedPageThunk({
+              pageArgument: currentPage - 1,
+            }),
+          )
+        }
       >
         {"<"}
       </button>
@@ -20,7 +24,15 @@ const Pagination = ({ currentPage, idByPages = 1 }) => {
         <button
           key={elm}
           className={currentPage - idByPages + 1 === index + 1 ? "active" : ""}
-          onClick={() => dispatch(gettingAllDataOnly(elm))}
+          onClick={() =>
+            dispatch(
+              dispatch(
+                getFilmByWantedPageThunk({
+                  pageArgument: elm,
+                }),
+              ),
+            )
+          }
         >
           {index + 1}
         </button>
@@ -28,7 +40,15 @@ const Pagination = ({ currentPage, idByPages = 1 }) => {
       <button
         className="arrows"
         disabled={currentPage === idByPages + 9}
-        onClick={() => dispatch(gettingAllDataOnly(currentPage + 1))}
+        onClick={() =>
+          dispatch(
+            dispatch(
+              getFilmByWantedPageThunk({
+                pageArgument: currentPage + 1,
+              }),
+            ),
+          )
+        }
       >
         {">"}
       </button>

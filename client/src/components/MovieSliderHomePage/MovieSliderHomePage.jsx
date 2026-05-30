@@ -9,20 +9,24 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/Routes";
 import { useDispatch, useSelector } from "react-redux";
-import { gettingDataPage } from "../../store/selectors/allDataSelector";
-import { gettingAllDataOnly } from "../../store/actions/allDataAction";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "./MovieSliderHomePage.scss";
+import { gettingDataPage } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
+import { getFilmByWantedPageThunk } from "../../store/api/api";
 
 export default function Movies() {
   const dispatch = useDispatch();
   const data = useSelector(gettingDataPage);
   useEffect(() => {
-    dispatch(gettingAllDataOnly(31));
+    dispatch(
+      getFilmByWantedPageThunk({
+        pageArgument: 31,
+      }),
+    );
   }, []);
   return (
     <div className="moviesBox">

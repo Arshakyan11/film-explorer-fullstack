@@ -12,21 +12,20 @@ import {
 import { ROUTES } from "../../routes/Routes";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { gettingDataPageFooter } from "../../store/selectors/allDataSelector";
-import { gettingAllDataOnlyFooter } from "../../store/actions/allDataAction";
-
 import styles from "./Footer.module.scss";
 import { getData } from "../../store/actions/EachFilmAction";
+import { getFooterDataThunk } from "../../store/api/api";
+import { gettingDataPageFooter } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
 
 const Footer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const data = useSelector(gettingDataPageFooter);
+  let data = useSelector(gettingDataPageFooter);
   const isLogged = JSON.parse(localStorage.getItem("usersInfo"));
 
-  data.length = 8;
+  const footerMovies = data.slice(0, 8);
   useEffect(() => {
-    dispatch(gettingAllDataOnlyFooter(32));
+    dispatch(getFooterDataThunk(32));
   }, []);
 
   return (
@@ -134,8 +133,8 @@ const Footer = () => {
                   <Link to={ROUTES.MOVIES}>Movies</Link>
                 </h3>
                 <ul>
-                  {data.length > 0 ? (
-                    data.map((movie) => (
+                  {footerMovies.length > 0 ? (
+                    footerMovies.map((movie) => (
                       <li
                         key={movie.id}
                         onClick={() => dispatch(getData(32, movie.id))}

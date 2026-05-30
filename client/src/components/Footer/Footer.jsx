@@ -13,8 +13,7 @@ import { ROUTES } from "../../routes/Routes";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Footer.module.scss";
-import { getData } from "../../store/actions/EachFilmAction";
-import { getFooterDataThunk } from "../../store/api/api";
+import { getFooterDataThunk, getOneMovieThunk } from "../../store/api/api";
 import { gettingDataPageFooter } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
 
 const Footer = () => {
@@ -137,7 +136,14 @@ const Footer = () => {
                     footerMovies.map((movie) => (
                       <li
                         key={movie.id}
-                        onClick={() => dispatch(getData(32, movie.id))}
+                        onClick={() =>
+                          dispatch(
+                            getOneMovieThunk({
+                              pageArgument: 32,
+                              idArgument: movie.id,
+                            }),
+                          )
+                        }
                       >
                         <Link to={`/${ROUTES.MOVIES}/32/${movie.id}`}>
                           {movie.title}

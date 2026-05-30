@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import paginationReducer from "./paginationReducer";
-import { EachFilmReducer } from "./EachFilmReducer";
+import EachFilmReducer from "../EachFilmSlice/EachFilmSlice.ts";
 import allDataReducer from "../AllFilmDataSlice/AllFilmDataSlice.ts";
 import { registrationReducer } from "./registrationReducer";
 import { loginReducer } from "./loginReducer";

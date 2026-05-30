@@ -1,10 +1,16 @@
 import axios from "axios";
 import { notifyforAdding, notifyforisExisting } from "../../helpers/notifyUser";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getFilmByWantedPageService } from "../../services/films.service";
+import {
+  getFilmByWantedPageService,
+  getFilmTrailerService,
+} from "../../services/films.service";
 import type {
   GetFilmByWantedPageReqType,
-  GetFilmByWantedPageThunkTType,
+  GetFilmByWantedPageThunkType,
+  GetOneMovieReqType,
+  GetOneMovieThunkType,
+  TrailerResponseType,
 } from "../../types/apiHandlingTypes";
 import { extractErrorMessage } from "../../services/instance";
 
@@ -18,7 +24,7 @@ const instance = axios.create({
 });
 
 export const getFilmByWantedPageThunk = createAsyncThunk<
-  GetFilmByWantedPageThunkTType,
+  GetFilmByWantedPageThunkType,
   GetFilmByWantedPageReqType,
   {
     rejectValue: string;
@@ -59,6 +65,57 @@ export const getFooterDataThunk = createAsyncThunk<
   },
 );
 
+export const getOneMovieThunk = createAsyncThunk<
+  GetOneMovieThunkType,
+  GetOneMovieReqType,
+  {
+    rejectValue: string;
+  }
+>(
+  "databyPages/getOneMovieThunk",
+  async ({ pageArgument, idArgument }, { rejectWithValue }) => {
+    try {
+      const res = await getFilmByWantedPageService(pageArgument);
+      return {
+        data: res.results,
+        page: pageArgument,
+        id: idArgument,
+      };
+    } catch (error) {
+      return rejectWithValue(
+        extractErrorMessage(
+          error,
+          "Error while getting Film Data for seperate page",
+        ),
+      );
+    }
+  },
+);
+
+export const fetchTrailerThunk = createAsyncThunk<
+  TrailerResponseType,
+  number,
+  { rejectValue: string }
+>("databyPages/fetchTrailerThunk", async (filmId, { rejectWithValue }) => {
+  try {
+    const res = await getFilmTrailerService(filmId);
+    if (!res.results.length) {
+      return {
+        hasTrailer: false,
+        trailerKey: null,
+      };
+    }
+    return {
+      hasTrailer: true,
+      trailerKey: res.results[0].key,
+    };
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while getting trailer"),
+    );
+  }
+});
+
 export const Axios = {
   getFromFirstPage() {
     return instance({ url: "top_rated?language=en-US&page=7" });
@@ -67,7 +124,7 @@ export const Axios = {
     return instance({
       url: `top_rated?language=en-US&page=${pageRcv ? pageRcv : 1}`,
     });
-  },
+  }, // done
   getDataByQuery(querry) {
     return instance({
       baseURL: `https://api.themoviedb.org/3/search/movie?query=${querry}&include_adult=false`,
@@ -77,7 +134,7 @@ export const Axios = {
     return instance({
       baseURL: `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
     });
-  },
+  }, //done
 };
 
 //local querry Users start

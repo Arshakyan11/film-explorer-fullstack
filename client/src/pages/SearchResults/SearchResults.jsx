@@ -10,22 +10,22 @@ import {
 } from "../../store/actions/searchingEachAction";
 
 import styles from "./SearchResults.module.scss";
-import { fetchTrailer } from "../../store/actions/EachFilmAction";
-import { getHaveTrailerBollean } from "../../store/selectors/EachFilmSelectors";
+import {
+  getHaveTrailerBollean,
+  getTrailerKey,
+} from "../../store/EachFilmSlice/EachFilmSlice";
+import { fetchTrailerThunk } from "../../store/api/api";
 
 const SearchResults = () => {
   const dispatch = useDispatch();
-  const iframeRef = useRef();
   const localSearchResult = JSON.parse(localStorage.getItem("searchResult"));
   const searchResults = useSelector(searchingEachResult);
   const haveTrailer = useSelector(getHaveTrailerBollean);
-
+  const trailerKey = useSelector(getTrailerKey);
   useEffect(() => {
     dispatch(setingSearchResult(localSearchResult[1]));
     dispatch(setingSearchResultALlData(localSearchResult[0]));
-    dispatch(
-      fetchTrailer({ filmId: localSearchResult[1][0].id, iframe: iframeRef })
-    );
+    dispatch(fetchTrailerThunk(localSearchResult[1][0].id));
   }, [localSearchResult[1][0].id, haveTrailer]);
   return (
     <section>
@@ -79,8 +79,9 @@ const SearchResults = () => {
                 {haveTrailer ? (
                   <iframe
                     className={styles.iframe}
-                    ref={iframeRef}
+                    src={`https://www.youtube.com/embed/${trailerKey}`}
                     title="trailer"
+                    allowFullScreen
                   ></iframe>
                 ) : (
                   ""

@@ -3,26 +3,31 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { star } from "../Images";
 import { ROUTES } from "../../routes/Routes";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTrailer, getData } from "../../store/actions/EachFilmAction";
+
+import styles from "./EachFilmSection.module.scss";
+import { fetchTrailerThunk, getOneMovieThunk } from "../../store/api/api";
 import {
   getHaveTrailerBollean,
   gettDataAllofPage,
-} from "../../store/selectors/EachFilmSelectors";
-
-import styles from "./EachFilmSection.module.scss";
+  getTrailerKey,
+} from "../../store/EachFilmSlice/EachFilmSlice";
 
 const EachFilmSection = () => {
   const { page, id } = useParams();
   const { eachData } = useSelector(gettDataAllofPage);
   const dispatch = useDispatch();
-  const iframeRef = useRef();
   const navigate = useNavigate();
   const haveTrailer = useSelector(getHaveTrailerBollean);
-
+  const trailerKey = useSelector(getTrailerKey);
   useEffect(() => {
     if (!Number.isNaN(Number(page)) && !Number.isNaN(Number(id))) {
-      dispatch(getData(Number(page), Number(id)));
-      dispatch(fetchTrailer({ filmId: id, iframe: iframeRef }));
+      dispatch(
+        getOneMovieThunk({
+          pageArgument: Number(page),
+          idArgument: Number(id),
+        }),
+      );
+      dispatch(fetchTrailerThunk(id));
     } else {
       navigate(`${ROUTES.ERROR}`);
     }
@@ -80,8 +85,9 @@ const EachFilmSection = () => {
                 {haveTrailer ? (
                   <iframe
                     className={styles.iframe}
-                    ref={iframeRef}
                     title="trailer"
+                    src={`https://www.youtube.com/embed/${trailerKey}`}
+                    allowFullScreen
                   ></iframe>
                 ) : (
                   ""

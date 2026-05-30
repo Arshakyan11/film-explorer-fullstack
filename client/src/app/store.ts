@@ -5,10 +5,12 @@ import {
   type TypedUseSelectorHook,
 } from "react-redux";
 import AllFilmDataReducer from "../store/AllFilmDataSlice/AllFilmDataSlice";
+import EachFilmReducer from "../store/EachFilmSlice/EachFilmSlice";
 
 const store = configureStore({
   reducer: {
     allFilmsData: AllFilmDataReducer,
+    databyPages: EachFilmReducer,
   },
 });
 

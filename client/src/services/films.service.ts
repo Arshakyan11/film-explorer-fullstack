@@ -6,3 +6,10 @@ export const getFilmByWantedPageService = async (pageArg: number) => {
   });
   return res.data;
 };
+
+export const getFilmTrailerService = async (movieID: number) => {
+  const res = await mainInstance({
+    baseURL: `https://api.themoviedb.org/3/movie/${movieID}/videos?language=en-US`,
+  }); 
+  return res.data;
+};

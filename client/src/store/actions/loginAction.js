@@ -12,7 +12,7 @@ export const loginGetting = (personName, passwordd, navigate) => {
   return (dispatch) => {
     LocalAxios.checkingLocalData().then((res) => {
       const exisitingUser = res.data.find(
-        (user) => passwordd === user.password && personName === user.username
+        (user) => passwordd === user.password && personName === user.username,
       );
       if (exisitingUser) {
         dispatch({
@@ -44,3 +44,6 @@ export const ChangingHidenPassword = (idHidenArgument) => {
     payload: idHidenArgument,
   };
 };
+
+
+

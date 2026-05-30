@@ -9,6 +9,10 @@ export const mainInstance = axios.create({
   },
 });
 
+export const localInstanceUsers = axios.create({
+  baseURL: "http://localhost:8000/users",
+});
+
 export const extractErrorMessage = (
   error: unknown,
   manualErrorMessage: string,
@@ -18,4 +22,3 @@ export const extractErrorMessage = (
   }
   return "Something Went Wron!!";
 };
-

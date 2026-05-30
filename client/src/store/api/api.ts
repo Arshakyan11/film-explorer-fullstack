@@ -12,7 +12,10 @@ import type {
   GetOneMovieThunkType,
   TrailerResponseType,
 } from "../../types/apiHandlingTypes";
-import { extractErrorMessage } from "../../services/instance";
+import {
+  extractErrorMessage,
+  localInstanceUsers,
+} from "../../services/instance";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_FILM_MAIN_URL,
@@ -136,11 +139,6 @@ export const Axios = {
     });
   }, //done
 };
-
-//local querry Users start
-const localInstanceUsers = axios.create({
-  baseURL: "http://localhost:8000/users",
-});
 
 export const LocalAxios = {
   addUserToLocalPageAndData(dataRcv) {

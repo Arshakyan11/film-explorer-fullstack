@@ -1,0 +1,36 @@
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+
+model User {
+  id String  @id @default(uuid())
+  username String
+  email  String @unique
+  phone String @unique
+  password String
+  watchlist WatchlistItem[]
+}
+
+model WatchlistItem {
+ id String @id @default(uuid())
+
+ movieId Int
+ page Int
+ title String
+ img String
+
+userId String
+user User @relation(fields: [userId], references: [id])
+
+}

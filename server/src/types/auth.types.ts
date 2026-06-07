@@ -12,3 +12,13 @@ export interface WatchListType {
   title: string;
   img: string;
 }
+
+export interface LoginUserType {
+  email: string;
+  password: string;
+}
+
+export interface ResetPasswordType {
+  password: string;
+  newPassword: string;
+}

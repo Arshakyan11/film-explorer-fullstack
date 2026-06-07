@@ -1,5 +1,9 @@
-import { registerService } from "../services/auth.service.ts";
-import { Request, Response, NextFunction } from "express";
+import {
+  loginService,
+  registerService,
+  resetPasswordService,
+} from "../services/auth.service";
+import type { Request, Response, NextFunction } from "express";
 export const registerUser = async (
   req: Request,
   res: Response,
@@ -14,12 +18,31 @@ export const registerUser = async (
   }
 };
 
-// export const loginUser = async (req, res, next) => {
-//   try {
-//     const data = req.body;
-//     const result = await loginService(data);
-//     return res.status(200).json(result);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+export const loginUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const data = req.body;
+    const result = await loginService(data);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const resetPassword = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const userID = req.user!.id;
+    const data = req.body;
+    const result = await resetPasswordService(userID, data);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};

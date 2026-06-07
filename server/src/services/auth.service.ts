@@ -1,23 +1,88 @@
-import { RegisterUserType } from "../types/auth.types.ts";
 import { prisma } from "../lib/prisma.ts";
-import { errorThrower } from "../utils/errorThrower.ts";
+import type {
+  LoginUserType,
+  RegisterUserType,
+  ResetPasswordType,
+} from "../types/auth.types.ts";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { errorThrower } from "../utils/errorThrower";
+
 export const registerService = async (data: RegisterUserType) => {
-  const existingUser = await prisma.user.findFirst({
+  const checkUser = await prisma.user.findFirst({
     where: {
       OR: [{ email: data.email }, { phone: data.phone }],
     },
   });
-  if (existingUser) {
-    errorThrower("User Already Exists!");
+  if (checkUser) {
+    return errorThrower("User Already Exists!");
   }
-  const user = await prisma.user.create({
+  const securePassword = await bcrypt.hash(data.password, 10);
+
+  await prisma.user.create({
     data: {
-      username: data.username,
       email: data.email,
       phone: data.phone,
-      password: data.password,
+      password: securePassword,
+      username: data.username,
     },
   });
-  return user;
 };
-// export const loginService = async (data) => {};
+export const loginService = async (data: LoginUserType) => {
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      email: data.email,
+    },
+  });
+  if (!existingUser) {
+    return errorThrower("Email or Password is wrong", 401);
+  }
+  const isMatch = await bcrypt.compare(data.password, existingUser.password);
+  if (!isMatch) {
+    return errorThrower("Email or Password is wrong", 401);
+  }
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    return errorThrower("JWT SECRET CODE IS MISSING IN BACKEND", 500);
+  }
+  const token = jwt.sign(
+    {
+      id: existingUser.id,
+      email: existingUser.email,
+    },
+    secret,
+    { expiresIn: "1h" },
+  );
+
+  const { id: _, password: _pass_word, ...cleanData } = existingUser;
+  return {
+    user: cleanData,
+    token,
+  };
+};
+
+export const resetPasswordService = async (
+  userID: string,
+  data: ResetPasswordType,
+) => {
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      id: userID,
+    },
+  });
+  if (!existingUser) {
+    return errorThrower("User not Found!", 401);
+  }
+  const isMatch = await bcrypt.compare(data.password, existingUser.password);
+  if (!isMatch) {
+    return errorThrower("Current password is incorrect", 401);
+  }
+  const newHashedPassword = await bcrypt.hash(data.newPassword, 10);
+  await prisma.user.update({
+    where: { id: userID },
+    data: { password: newHashedPassword },
+  });
+  return {
+    message: "Password has been changed successfully",
+  };
+};

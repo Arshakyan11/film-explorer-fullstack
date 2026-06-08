@@ -1,4 +1,5 @@
 import {
+  getUserInfoService,
   loginService,
   registerService,
   resetPasswordService,
@@ -41,6 +42,20 @@ export const resetPassword = async (
     const userID = req.user!.id;
     const data = req.body;
     const result = await resetPasswordService(userID, data);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUserInfo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const userID = req.user!.id;
+    const result = await getUserInfoService(userID);
     return res.status(200).json(result);
   } catch (error) {
     next(error);

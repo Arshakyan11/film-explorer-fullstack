@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getUserInfo,
   loginUser,
   registerUser,
   resetPassword,
@@ -10,5 +11,6 @@ const route = express.Router();
 route.post("/registration", registerUser);
 route.post("/login", loginUser);
 route.patch("/resetPassword", authMiddleware, resetPassword);
+route.get("/profile", authMiddleware, getUserInfo);
 
 export default route;

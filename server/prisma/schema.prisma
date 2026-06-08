@@ -20,12 +20,16 @@ model User {
   phone String @unique
   password String
   watchlist WatchlistItem[]
+  subscriptionId String?
+  subscription Subscription? @relation(fields : [subscriptionId] , references : [id])
 }
 
 model Subscription {
   id String @id
-  name : String
-  price : Int 
+  name String
+  price Int 
+
+  users User[]
 }
 
 model WatchlistItem {

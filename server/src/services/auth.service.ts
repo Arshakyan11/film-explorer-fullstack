@@ -92,3 +92,18 @@ export const resetPasswordService = async (
     message: "Password has been changed successfully",
   };
 };
+
+export const getUserInfoService = async (userID: string) => {
+  const userInfo = await prisma.user.findUnique({
+    where: { id: userID },
+    include: {
+      subscription: true,
+      watchlist: true,
+    },
+  });
+  if (!userInfo) {
+    return errorThrower("User not found", 404);
+  }
+  const { id, password, subscriptionId, ...cleanData } = userInfo;
+  return cleanData;
+};

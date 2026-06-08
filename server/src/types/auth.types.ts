@@ -29,3 +29,7 @@ export interface MovieStructureType {
   title: string;
   img: string;
 }
+
+export interface SubscriptionChangeType {
+  subscriptionId: string;
+}

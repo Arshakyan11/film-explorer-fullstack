@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  deleteUserAccount,
   getUserInfo,
   loginUser,
   registerUser,
@@ -12,5 +13,6 @@ route.post("/registration", registerUser);
 route.post("/login", loginUser);
 route.patch("/resetPassword", authMiddleware, resetPassword);
 route.get("/profile", authMiddleware, getUserInfo);
+route.delete("/profile", authMiddleware, deleteUserAccount);
 
 export default route;

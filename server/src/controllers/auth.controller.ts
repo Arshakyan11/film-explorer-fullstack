@@ -1,4 +1,5 @@
 import {
+  deleteUserAccountService,
   getUserInfoService,
   loginService,
   registerService,
@@ -56,6 +57,20 @@ export const getUserInfo = async (
   try {
     const userID = req.user!.id;
     const result = await getUserInfoService(userID);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteUserAccount = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const userID = req.user!.id;
+    const result = await deleteUserAccountService(userID);
     return res.status(200).json(result);
   } catch (error) {
     next(error);

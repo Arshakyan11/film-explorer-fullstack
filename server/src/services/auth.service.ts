@@ -33,6 +33,9 @@ export const loginService = async (data: LoginUserType) => {
     where: {
       email: data.email,
     },
+    include: {
+      subscription: true,
+    },
   });
   if (!existingUser) {
     return errorThrower("Email or Password is wrong", 401);
@@ -54,7 +57,12 @@ export const loginService = async (data: LoginUserType) => {
     { expiresIn: "1h" },
   );
 
-  const { id: _, password: _pass_word, ...cleanData } = existingUser;
+  const {
+    id: _,
+    password: _pass_word,
+    subscriptionId,
+    ...cleanData
+  } = existingUser;
   return {
     user: cleanData,
     token,
@@ -105,4 +113,20 @@ export const getUserInfoService = async (userID: string) => {
   }
   const { id, password, subscriptionId, ...cleanData } = userInfo;
   return cleanData;
+};
+
+export const deleteUserAccountService = async (userID: string) => {
+  try {
+    await prisma.user.delete({
+      where: { id: userID },
+    });
+    return {
+      message: "Account deleted Successfully",
+    };
+  } catch (error: any) {
+    if (error.code === "P2025") {
+      errorThrower("User not found", 404);
+    }
+    throw error;
+  }
 };

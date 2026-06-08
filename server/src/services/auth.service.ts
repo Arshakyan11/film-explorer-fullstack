@@ -77,6 +77,12 @@ export const resetPasswordService = async (
   if (!isMatch) {
     return errorThrower("Current password is incorrect", 401);
   }
+  if (data.newPassword === data.password) {
+    return errorThrower(
+      "New password must be different from the current password",
+      400,
+    );
+  }
   const newHashedPassword = await bcrypt.hash(data.newPassword, 10);
   await prisma.user.update({
     where: { id: userID },

@@ -71,7 +71,7 @@ export const resetPasswordService = async (
     },
   });
   if (!existingUser) {
-    return errorThrower("User not Found!", 401);
+    return errorThrower("User not Found!", 404);
   }
   const isMatch = await bcrypt.compare(data.password, existingUser.password);
   if (!isMatch) {

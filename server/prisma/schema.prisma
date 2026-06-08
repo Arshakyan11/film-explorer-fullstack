@@ -22,6 +22,12 @@ model User {
   watchlist WatchlistItem[]
 }
 
+model Subscription {
+  id String @id
+  name : String
+  price : Int 
+}
+
 model WatchlistItem {
  id String @id @default(uuid())
 
@@ -33,4 +39,5 @@ model WatchlistItem {
 userId String
 user User @relation(fields: [userId], references: [id])
 
+@@unique([userId, movieId])
 }

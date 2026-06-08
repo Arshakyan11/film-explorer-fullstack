@@ -1,12 +1,14 @@
 import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import AuthRoute from "./src/routes/auth.route.ts";
+import WatchlistRoute from "./src/routes/watchlist.route";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/auth", AuthRoute);
+app.use("/watchlist", WatchlistRoute);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   const status = 500;

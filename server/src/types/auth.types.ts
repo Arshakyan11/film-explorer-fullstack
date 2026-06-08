@@ -22,3 +22,10 @@ export interface ResetPasswordType {
   password: string;
   newPassword: string;
 }
+
+export interface MovieStructureType {
+  movieId: number;
+  page: number;
+  title: string;
+  img: string;
+}

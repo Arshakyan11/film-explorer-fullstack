@@ -98,7 +98,6 @@ export const getUserInfoService = async (userID: string) => {
     where: { id: userID },
     include: {
       subscription: true,
-      watchlist: true,
     },
   });
   if (!userInfo) {

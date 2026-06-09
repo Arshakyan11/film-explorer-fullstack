@@ -21,16 +21,22 @@ export const validationRegistration = object({
 });
 
 export const validationLogin = object({
-  personName: string().required("Pls write Name"),
-  password: string().required("Pls write Your password"),
+  email: string()
+    .matches(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/, "Pls enter valid email")
+    .required("Pls write Your Email"),
+  password: string()
+    .min(6, "Write Minimum 6 symbols")
+    .max(16, "Write Maximum 16 symbols")
+    .required("Pls Write Your Password"),
 });
 
 export const validationProfile = object({
-  emailInput: string()
-    .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Pls enter valid email")
-    .required("Pls write Your Email"),
-  passwordInput: string()
+  password: string().required("Pls Write Your Old Password"),
+  newPassword: string()
     .min(6, "Write Minimum 6 symbols")
     .max(16, "Write Maximum 16 symbols")
-    .required("Pls write Your password"),
+    .required("Pls write New password"),
+  newPasswordRepeat: string()
+    .oneOf([ref("newPassword")], "The password is not the same")
+    .required("Pls Repeat Your New Passowrd"),
 });

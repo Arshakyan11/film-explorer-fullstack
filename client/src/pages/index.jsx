@@ -7,7 +7,7 @@ import EachFilm from "./EachFilm/EachFilm.jsx";
 import RecomendedMovies from "./RecomendedMovies/RecomendedMovies.jsx";
 import NewMovies from "./NewMovies/NewMovies.jsx";
 import Registration from "./Registration/Registration.jsx";
-import Login from "./Login/Login.jsx";
+import Login from "./Login/Login.tsx";
 import Profile from "./Profile/Profile.jsx";
 import Plans from "./Plans/Plans.jsx";
 import Watchlist from "./Watchlist/Watchlist.jsx";

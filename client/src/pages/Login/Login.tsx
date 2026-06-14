@@ -1,22 +1,22 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ROUTES } from "../../routes/Routes";
 import { validationLogin } from "../../helpers/useValidation";
-import { useDispatch, useSelector } from "react-redux";
-import { loginGlobal } from "../../store/selectors/loginSelectors";
-import {
-  ChangingHidenPassword,
-  loginGetting,
-} from "../../store/actions/loginAction";
 
 import styles from "./Login.module.scss";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  loginGlobal,
+  setLogVisiblePass,
+} from "../../store/LoginSlice/LoginSlice";
+import { loginUserHelper } from "../../helpers/createUserFrom";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { initialValues, isHiden, isExisting } = useSelector(loginGlobal);
+  const dispatch = useAppDispatch();
+  const { initialValues, isHiden } = useAppSelector(loginGlobal);
+
   return (
     <section>
       <div className={styles.registrationSec}>
@@ -25,17 +25,16 @@ const Login = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationLogin}
-            onSubmit={(e, formik) => {
-              const { personName, password } = e;
-              dispatch(loginGetting(personName, password, navigate));
+            onSubmit={(e) => {
+              loginUserHelper(e, dispatch, navigate);
             }}
           >
             <Form>
               <fieldset>
-                <Field name="personName" placeholder="Name" type="text" />
+                <Field name="email" placeholder="Email Address" type="text" />
                 <legend>
                   <ErrorMessage
-                    name="personName"
+                    name="email"
                     component="div"
                     className={styles.erorr}
                   ></ErrorMessage>
@@ -50,7 +49,7 @@ const Login = () => {
                 />
                 <p
                   className={styles.showHide}
-                  onClick={() => dispatch(ChangingHidenPassword(!isHiden))}
+                  onClick={() => dispatch(setLogVisiblePass(!isHiden))}
                 >
                   {isHiden ? <FaEye /> : <FaEyeSlash />}
                 </p>
@@ -63,9 +62,6 @@ const Login = () => {
                   ></ErrorMessage>
                 </legend>
               </fieldset>
-              <p className={styles.missing}>
-                {!isExisting && "User Doesnt Exist!!!"}
-              </p>
               <div className={styles.btns}>
                 <button type="submit">Login</button>
                 <Link to={`/${ROUTES.REGISTRATION}`}>Go to Registration</Link>

@@ -16,6 +16,11 @@ import {
   extractErrorMessage,
   localInstanceUsers,
 } from "../../services/instance";
+import { loginService } from "../../services/auth.service";
+import type {
+  SignInDataRecievingType,
+  SignInUserSendingType,
+} from "../../types/formTypes";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_FILM_MAIN_URL,
@@ -112,6 +117,21 @@ export const fetchTrailerThunk = createAsyncThunk<
       hasTrailer: true,
       trailerKey: res.results[0].key,
     };
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while getting trailer"),
+    );
+  }
+});
+
+export const loginUserThunk = createAsyncThunk<
+  SignInDataRecievingType,
+  SignInUserSendingType,
+  { rejectValue: string }
+>("login/loginUserThunk", async (data, { rejectWithValue }) => {
+  try {
+    const res = await loginService(data);
+    return res;
   } catch (error) {
     return rejectWithValue(
       extractErrorMessage(error, "Error while getting trailer"),

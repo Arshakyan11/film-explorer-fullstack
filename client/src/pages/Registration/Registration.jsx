@@ -9,10 +9,10 @@ import {
   seeHidenPasswordOnReg,
 } from "../../store/actions/registrationAction";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { createUserFromRegistration } from "../../helpers/createUserFrom";
 import { validationRegistration } from "../../helpers/useValidation";
 
 import styles from "./Registration.module.scss";
+import { createUserFromRegistration } from "../../helpers/createUserFrom";
 
 const Registration = () => {
   const dispatch = useDispatch();

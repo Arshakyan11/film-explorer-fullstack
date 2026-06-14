@@ -19,7 +19,6 @@ export type GetOneMovieReqType = {
   idArgument: number;
 };
 
-
 export type TrailerResponseType = {
   hasTrailer: boolean;
   trailerKey: string | null;

@@ -3,7 +3,7 @@ import paginationReducer from "./paginationReducer";
 import EachFilmReducer from "../EachFilmSlice/EachFilmSlice.ts";
 import allDataReducer from "../AllFilmDataSlice/AllFilmDataSlice.ts";
 import { registrationReducer } from "./registrationReducer";
-import { loginReducer } from "./loginReducer";
+import loginReducer from "../LoginSlice/LoginSlice.ts";
 import { plansReducer } from "./plansReducer";
 import { profileReducer } from "./profileReducer";
 import { watchlistReducer } from "./watchlistReducer";

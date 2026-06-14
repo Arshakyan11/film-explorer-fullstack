@@ -10,8 +10,8 @@ import {
   profileDataSending,
   profilePasswordSee,
 } from "../../store/actions/profileActions";
-import { editiingProfileInfo } from "../../helpers/createUserFrom";
 import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
+import { editiingProfileInfo } from "../../helpers/createUserFrom";
 
 const Profile = () => {
   const { isHiden, isEditing, userData, initialValues } =

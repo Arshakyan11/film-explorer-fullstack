@@ -16,9 +16,17 @@ import {
   extractErrorMessage,
   localInstanceUsers,
 } from "../../services/instance";
-import { loginService } from "../../services/auth.service";
+import {
+  getUserInfoService,
+  loginService,
+  registerService,
+  resetPasswordService,
+} from "../../services/auth.service";
 import type {
+  RegisterUserSendingType,
+  ResetPasswordSendingType,
   SignInDataRecievingType,
+  SignInUserInfoType,
   SignInUserSendingType,
 } from "../../types/formTypes";
 
@@ -131,6 +139,49 @@ export const loginUserThunk = createAsyncThunk<
 >("login/loginUserThunk", async (data, { rejectWithValue }) => {
   try {
     const res = await loginService(data);
+    return res;
+  } catch (error) {
+    return rejectWithValue(extractErrorMessage(error, "Error while login"));
+  }
+});
+
+export const registerUserThunk = createAsyncThunk<
+  string,
+  RegisterUserSendingType,
+  { rejectValue: string }
+>("registration/registerUserThunk", async (data, { rejectWithValue }) => {
+  try {
+    await registerService(data);
+    return "Account Registered Successfuly";
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while registration"),
+    );
+  }
+});
+
+export const resetPasswordThunk = createAsyncThunk<
+  { message: string },
+  ResetPasswordSendingType,
+  { rejectValue: string }
+>("profile/resetPasswordThunk", async (data, { rejectWithValue }) => {
+  try {
+    const res = await resetPasswordService(data);
+    return res;
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while reseting password"),
+    );
+  }
+});
+
+export const getCurretUserInfoThunk = createAsyncThunk<
+  SignInUserInfoType,
+  void,
+  { rejectValue: string }
+>("authentication/getCurretUserInfoThunk", async (_, { rejectWithValue }) => {
+  try {
+    const res = await getUserInfoService();
     return res;
   } catch (error) {
     return rejectWithValue(

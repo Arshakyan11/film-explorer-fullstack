@@ -15,7 +15,7 @@ export const registerService = async (data: RegisterUserType) => {
     },
   });
   if (checkUser) {
-    return errorThrower("User Already Exists!");
+    return errorThrower("User with this credentails already exists!");
   }
   const securePassword = await bcrypt.hash(data.password, 10);
 

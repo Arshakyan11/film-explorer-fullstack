@@ -41,7 +41,7 @@ export const LoginSlice = createSlice({
     });
     builder.addCase(loginUserThunk.rejected, (state, action) => {
       state.isLoading = false;
-      // state.error = action.payload ?? "Something Went Wrong!";
+      state.error = action.payload ?? "Something Went Wrong!";
     });
   },
 });

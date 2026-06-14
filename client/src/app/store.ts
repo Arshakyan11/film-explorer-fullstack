@@ -7,11 +7,17 @@ import {
 import AllFilmDataReducer from "../store/AllFilmDataSlice/AllFilmDataSlice";
 import EachFilmReducer from "../store/EachFilmSlice/EachFilmSlice";
 import LoginReducer from "../store/LoginSlice/LoginSlice";
+import RegistrationReducer from "../store/RegistrationSlice/RegistrationSlice";
+import ProfileReducer from "../store/ProfileSlice/ProfileSlice";
+import AuthReducer from "../store/AuthSlice/AuthSlice";
 const store = configureStore({
   reducer: {
     allFilmsData: AllFilmDataReducer,
     databyPages: EachFilmReducer,
     login: LoginReducer,
+    registration: RegistrationReducer,
+    profile: ProfileReducer,
+    authentication: AuthReducer,
   },
 });
 

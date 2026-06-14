@@ -1,38 +1,35 @@
-import React, { useEffect } from "react";
 import styles from "./Profile.module.scss";
 import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { validationProfile } from "../../helpers/useValidation";
-import { useDispatch, useSelector } from "react-redux";
-import { profileGlobal } from "../../store/selectors/profileSelectors";
-import {
-  datagetForProfile,
-  profileDataSending,
-  profilePasswordSee,
-} from "../../store/actions/profileActions";
+
 import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
 import { editiingProfileInfo } from "../../helpers/createUserFrom";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import {
+  getAllProfileInfo,
+  profilePasswordSee,
+} from "../../store/ProfileSlice/ProfileSlice";
+import { getUserInfo } from "../../store/AuthSlice/AuthSlice";
 
 const Profile = () => {
-  const { isHiden, isEditing, userData, initialValues } =
-    useSelector(profileGlobal);
-  const dispatch = useDispatch();
+  const { isHiden, isEditing, initialValues } =
+    useAppSelector(getAllProfileInfo);
+  const dispatch = useAppDispatch();
+  const { userInfo } = useAppSelector(getUserInfo);
 
-  useEffect(() => {
-    dispatch(datagetForProfile(JSON.parse(localStorage.getItem("usersInfo"))));
-  }, []);
+  const handleSave = (e, fornik) => {
+    const { newPasswordRepeat, ...resetData } = e;
+    console.log(resetData);
 
-  const handleSave = (e, formik) => {
-    const data = editiingProfileInfo(e, userData);
-    localStorage.setItem("usersInfo", JSON.stringify(data));
-    dispatch(profileDataSending(userData.id, data));
+    editiingProfileInfo(resetData, fornik, dispatch);
   };
-
+  if (!userInfo) return null;
   return (
     <div className={styles.sectionProfile}>
       <div className={styles.container}>
         <ProfileNavBar
-          userData={userData}
+          userInfo={userInfo}
           isEditing={isEditing}
           forWhich={"forProfile"}
         />
@@ -49,14 +46,14 @@ const Profile = () => {
               <Form>
                 <fieldset>
                   <Field
-                    type="email"
-                    name="emailInput"
+                    type="password"
+                    name="password"
                     className={styles.input}
-                    placeholder="Write New Email"
+                    placeholder="Your Last Password"
                   />
                   <legend>
                     <ErrorMessage
-                      name="emailInput"
+                      name="password"
                       component="div"
                       className={styles.erorr}
                     ></ErrorMessage>
@@ -66,9 +63,9 @@ const Profile = () => {
                 <fieldset>
                   <Field
                     type={isHiden ? "password" : "text"}
-                    name="passwordInput"
+                    name="newPassword"
                     className={styles.input}
-                    placeholder="Write new Password"
+                    placeholder="New Password"
                   />
                   <p
                     className={styles.showHide}
@@ -78,7 +75,29 @@ const Profile = () => {
                   </p>
                   <legend>
                     <ErrorMessage
-                      name="passwordInput"
+                      name="newPassword"
+                      component="div"
+                      className={styles.erorr}
+                    ></ErrorMessage>
+                  </legend>
+                </fieldset>
+
+                <fieldset>
+                  <Field
+                    type={isHiden ? "password" : "text"}
+                    name="newPasswordRepeat"
+                    className={styles.input}
+                    placeholder="Repeat New Password"
+                  />
+                  <p
+                    className={styles.showHide}
+                    onClick={() => dispatch(profilePasswordSee(!isHiden))}
+                  >
+                    {isHiden ? <FaEye /> : <FaEyeSlash />}
+                  </p>
+                  <legend>
+                    <ErrorMessage
+                      name="newPasswordRepeat"
                       component="div"
                       className={styles.erorr}
                     ></ErrorMessage>
@@ -93,7 +112,7 @@ const Profile = () => {
           ) : (
             <>
               <p className={styles.input}>
-                {userData.email || "NO INFORMATION"}
+                {userInfo?.email || "NO INFORMATION"}
               </p>
               <p className={styles.input}>{"*".repeat(8)}</p>
             </>

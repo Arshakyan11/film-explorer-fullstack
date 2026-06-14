@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./ProfileNavBar.module.scss";
 import {
   FaEdit,
@@ -10,18 +10,29 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/Routes";
-import { useDispatch } from "react-redux";
-import { profileEditing } from "../../store/actions/profileActions";
 import axios from "axios";
+import { profileEditing } from "../../store/ProfileSlice/ProfileSlice";
+import { useAppDispatch } from "../../app/store";
+import type { SignInUserInfoType } from "../../types/formTypes";
 
-const ProfileNavBar = ({ userData, isEditing, forWhich }) => {
+interface ProfileNavBarProps {
+  userInfo: SignInUserInfoType;
+  isEditing: boolean;
+  forWhich: string;
+}
+
+const ProfileNavBar = ({
+  userInfo,
+  isEditing,
+  forWhich,
+}: ProfileNavBarProps) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const deleteAccount = () => {
     axios({
-      baseURL: `http://localhost:8000/users/${userData.id}`,
+      baseURL: `http://localhost:8000/users/id`,
       method: "DELETE",
     }).finally(() => {
       localStorage.removeItem("usersInfo");
@@ -46,7 +57,7 @@ const ProfileNavBar = ({ userData, isEditing, forWhich }) => {
               alt="Profile"
               className={styles.profileImage}
             />
-            <p className={styles.email}>{userData.email}</p>
+            <p className={styles.email}>{userInfo.email}</p>
           </div>
           {forWhich === "forProfile" ? (
             <div className={styles.forProfile}>
@@ -58,7 +69,7 @@ const ProfileNavBar = ({ userData, isEditing, forWhich }) => {
               </button>
               <p className={styles.subscription}>Your subscription is</p>
               <p className={styles.expiryDate}>
-                {userData.selectedPlans?.name || "No Plan Selected"}
+                {userInfo.subscription?.name || "No Plan Selected"}
               </p>
             </div>
           ) : forWhich === "forPlans" ? (

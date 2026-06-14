@@ -23,3 +23,4 @@ export type TrailerResponseType = {
   hasTrailer: boolean;
   trailerKey: string | null;
 };
+

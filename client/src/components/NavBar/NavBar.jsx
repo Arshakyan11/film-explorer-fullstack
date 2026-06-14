@@ -16,11 +16,12 @@ import { LogoutFromAccount } from "../../helpers/logOut.js";
 import { HandleSearch } from "../../helpers/searchHelper.js";
 
 import "./NavBar.scss";
+import { isTokenValid } from "../../helpers/checkToken.js";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isLogged = JSON.parse(localStorage.getItem("usersInfo"));
+  const isLogged = isTokenValid();
   const searchResults = useSelector(searchingEachData);
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
@@ -106,7 +107,7 @@ const NavBar = () => {
                           onClick={() => {
                             localStorage.setItem(
                               "searchResult",
-                              JSON.stringify([searchResults, [movie]])
+                              JSON.stringify([searchResults, [movie]]),
                             );
                             dispatch(transferData());
                             dispatch(recivingData(""));
@@ -275,7 +276,7 @@ const NavBar = () => {
                             onClick={() => {
                               localStorage.setItem(
                                 "searchResult",
-                                JSON.stringify([searchResults, [movie]])
+                                JSON.stringify([searchResults, [movie]]),
                               );
                               dispatch(transferData());
                               dispatch(recivingData(""));

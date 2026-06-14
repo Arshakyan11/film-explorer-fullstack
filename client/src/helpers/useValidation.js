@@ -1,12 +1,12 @@
 import { object, ref, string } from "yup";
 
 export const validationRegistration = object({
-  personName: string()
+  username: string()
     .min(2, "Pls write more than 1 symbols")
     .max(16, "Pls write less than 16 symbols")
     .required("Pls write Name"),
   phone: string()
-    .matches(/^\+[0-9]{11}$/, "Pls enter valid phone Number")
+    .matches(/^\+\d{9,15}$/, "Pls enter valid phone Number")
     .required("Pls write Your phone Number"),
   email: string()
     .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, "Pls enter valid email")

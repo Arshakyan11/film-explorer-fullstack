@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const registerSchema = z.object({
-  userName: z
+  username: z
     .string()
     .min(2, "Pls write more than 1 symbol")
     .max(16, "Pls write less than 16 symbols"),

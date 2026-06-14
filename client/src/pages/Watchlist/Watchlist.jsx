@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styles from "./Watchlist.module.scss";
 import { ROUTES } from "../../routes/Routes";
 import { Link } from "react-router-dom";
-import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateMovie,
@@ -11,6 +10,7 @@ import {
 import { globalData } from "../../store/selectors/watchlistSelector";
 import { notifyforRemoving } from "../../helpers/notifyUser";
 import { filmNotFound } from "../../components/Images";
+import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
 
 const Watchlist = () => {
   const userData = JSON.parse(localStorage.getItem("usersInfo")) || [];

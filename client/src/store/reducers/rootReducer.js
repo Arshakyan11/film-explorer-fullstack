@@ -2,10 +2,11 @@ import { combineReducers } from "redux";
 import paginationReducer from "./paginationReducer";
 import EachFilmReducer from "../EachFilmSlice/EachFilmSlice.ts";
 import allDataReducer from "../AllFilmDataSlice/AllFilmDataSlice.ts";
-import { registrationReducer } from "./registrationReducer";
+import registrationReducer from "../RegistrationSlice/RegistrationSlice.ts";
 import loginReducer from "../LoginSlice/LoginSlice.ts";
 import { plansReducer } from "./plansReducer";
-import { profileReducer } from "./profileReducer";
+import profileReducer from "../ProfileSlice/ProfileSlice.ts";
+import AuthReducer from "../AuthSlice/AuthSlice.ts";
 import { watchlistReducer } from "./watchlistReducer";
 import { searchingEachReducer } from "./searchingEachReducer";
 
@@ -19,5 +20,6 @@ const reducers = combineReducers({
   profile: profileReducer,
   watchlist: watchlistReducer,
   searchingEach: searchingEachReducer,
+  authentication: AuthReducer,
 });
 export default reducers;

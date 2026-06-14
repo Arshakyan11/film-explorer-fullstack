@@ -1,22 +1,20 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ROUTES } from "../../routes/Routes";
-import { useDispatch, useSelector } from "react-redux";
-import { registrationGlobal } from "../../store/selectors/registrationSelectors";
-import {
-  RegistrationDataGetting,
-  seeHidenPasswordOnReg,
-} from "../../store/actions/registrationAction";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { validationRegistration } from "../../helpers/useValidation";
 
 import styles from "./Registration.module.scss";
-import { createUserFromRegistration } from "../../helpers/createUserFrom";
+import { createUserData } from "../../helpers/createUserFrom";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import {
+  getAllRegInfo,
+  seeHidenPasswordOnReg,
+} from "../../store/RegistrationSlice/RegistrationSlice";
 
 const Registration = () => {
-  const dispatch = useDispatch();
-  const { isHiden, initialValues } = useSelector(registrationGlobal);
+  const dispatch = useAppDispatch();
+  const { isHiden, initialValues } = useAppSelector(getAllRegInfo);
   const navigate = useNavigate();
   return (
     <section>
@@ -27,17 +25,16 @@ const Registration = () => {
             initialValues={initialValues}
             validationSchema={validationRegistration}
             onSubmit={(e, formik) => {
-              dispatch(RegistrationDataGetting(createUserFromRegistration(e)));
-              navigate(`/${ROUTES.LOGIN}`);
-              formik.resetForm();
+              const { passwordRepeat, ...cleanUser } = e;
+              createUserData(cleanUser, formik, dispatch, navigate);
             }}
           >
             <Form>
               <fieldset>
-                <Field name="personName" placeholder="Name" type="text" />
+                <Field name="username" placeholder="Name" type="text" />
                 <legend>
                   <ErrorMessage
-                    name="personName"
+                    name="username"
                     component="div"
                     className={styles.erorr}
                   ></ErrorMessage>
@@ -45,7 +42,7 @@ const Registration = () => {
               </fieldset>
 
               <fieldset>
-                <Field name="phone" placeholder="phone Number" type="text" />
+                <Field name="phone" placeholder="Phone Number" type="text" />
 
                 <legend>
                   <ErrorMessage
@@ -57,7 +54,7 @@ const Registration = () => {
               </fieldset>
 
               <fieldset>
-                <Field name="email" placeholder="email" type="email" />
+                <Field name="email" placeholder="Email" type="email" />
                 <legend>
                   <ErrorMessage
                     name="email"

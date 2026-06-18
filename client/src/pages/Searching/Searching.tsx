@@ -1,24 +1,22 @@
-import React, { useEffect } from "react";
 import { HandleSearchMAIN } from "../../helpers/searchHelper";
 import { filmNotFound, searchImg, star } from "../../components/Images";
 import { ROUTES } from "../../routes/Routes";
 import {
-  recivingData,
   recivingDataMAIN,
   setingSearchResult,
 } from "../../store/actions/searchingEachAction";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { searchingEachDataMAIN } from "../../store/selectors/searchingEachSelector";
-import { watchlistAddingToUser } from "../../store/actions/watchlistAction";
 
 import styles from "./Searching.module.scss";
+import { isTokenValid } from "../../helpers/checkToken";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import { addItemTotheWatchlistHelper } from "../../helpers/createUserFrom";
 
 const Searching = () => {
-  const dispatch = useDispatch();
-  const searchResults = useSelector(searchingEachDataMAIN);
-  const isLogged = JSON.parse(localStorage.getItem("usersInfo"));
-
+  const dispatch = useAppDispatch();
+  const searchResults = useAppSelector(searchingEachDataMAIN);
+  const isLogged = isTokenValid();
   return (
     <section className={styles.searchSection}>
       <div className={styles.container}>
@@ -73,7 +71,7 @@ const Searching = () => {
                           dispatch(setingSearchResult([movie]));
                           localStorage.setItem(
                             "searchResult",
-                            JSON.stringify([searchResults, [movie]])
+                            JSON.stringify([searchResults, [movie]]),
                           );
                         }}
                       >
@@ -81,16 +79,9 @@ const Searching = () => {
                       </Link>
                       {isLogged ? (
                         <button
-                          onClick={() => {
-                            dispatch(
-                              watchlistAddingToUser(isLogged.id, {
-                                page: 7,
-                                id: movie.id,
-                                title: movie.original_title,
-                                img: movie.poster_path,
-                              })
-                            );
-                          }}
+                          onClick={() =>
+                            addItemTotheWatchlistHelper(movie, dispatch)
+                          }
                           className={styles.link2}
                         >
                           Add to Watchlist

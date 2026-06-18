@@ -1,7 +1,7 @@
 import React from "react";
-import AllFilmsSorted from "../../components/AllFilmsSorted/AllFilmsSorted";
 
 import styles from "./NewMovies.module.scss";
+import AllFilmsSorted from "../../components/AllFilmsSorted/AllFilmsSorted";
 
 const NewMovies = () => {
   return (

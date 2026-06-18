@@ -4,13 +4,13 @@ import type { RootState } from "../../app/store";
 import { getCurretUserInfoThunk } from "../api/api";
 import { getLocalUserStrict } from "../../helpers/localStorage";
 
-interface InitialStateType {
+interface AuthSLiceType {
   userInfo: SignInUserInfoType | null;
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: InitialStateType = {
+const initialState: AuthSLiceType = {
   userInfo: getLocalUserStrict(),
   isLoading: false,
   error: null,

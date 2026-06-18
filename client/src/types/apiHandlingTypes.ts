@@ -37,3 +37,10 @@ export type AllPlansResponseType = {
 export type SavePlanOfTheAccountResType = {
   subscriptionId: string;
 };
+
+export type AddItemToWatchlistReqType = {
+  movieId: string;
+  title: string;
+  img: string;
+  page: number;
+};

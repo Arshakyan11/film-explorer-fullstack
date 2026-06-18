@@ -8,6 +8,7 @@ import type { AppDispatch } from "../app/store";
 import type { NavigateFunction } from "react-router-dom";
 import { useAsyncAction } from "../hooks/useAsyncAction";
 import {
+  addItemtoWatchlistThunk,
   loginUserThunk,
   registerUserThunk,
   resetPasswordThunk,
@@ -61,4 +62,23 @@ export const editiingProfileInfo = async (
     successMessage: (res) => res.message,
   });
   form.resetForm();
+};
+
+export const addItemTotheWatchlistHelper = async (
+  movie: any,
+  dispatch: AppDispatch,
+  currentPage: number = 7,
+) => {
+  await run({
+    action: () =>
+      dispatch(
+        addItemtoWatchlistThunk({
+          movieId: movie.id,
+          title: movie.original_title,
+          img: movie.poster_path,
+          page: currentPage,
+        }),
+      ).unwrap(),
+    successMessage: (res) => res.message,
+  });
 };

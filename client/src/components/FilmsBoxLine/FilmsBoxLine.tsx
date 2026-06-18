@@ -3,11 +3,11 @@ import { star } from "../Images";
 import { ROUTES } from "../../routes/Routes";
 
 import styles from "./FilmsBoxLine.module.scss";
-import { watchlistAddingToUser } from "../../store/actions/watchlistAction";
 import { getFilmByWantedPageThunk } from "../../store/api/api";
 import { isTokenValid } from "../../helpers/checkToken";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import { getAllPaginationInfo } from "../../store/PaginationSlice/PaginationSlice";
+import { addItemTotheWatchlistHelper } from "../../helpers/createUserFrom";
 
 const FilmsBoxLine = ({
   moviesCategory,
@@ -19,7 +19,6 @@ const FilmsBoxLine = ({
   const dispatch = useAppDispatch();
   const { data } = useAppSelector(getAllPaginationInfo);
   const isLogged = isTokenValid();
-
   return (
     <section>
       <div className={styles.filmsLineSection}>
@@ -72,16 +71,7 @@ const FilmsBoxLine = ({
                   </Link>
                   {isLogged ? (
                     <button
-                      onClick={() => {
-                        // dispatch(
-                        //   watchlistAddingToUser(isLogged.id, {
-                        //     page: 7,
-                        //     id: elm.id,
-                        //     title: elm.original_title,
-                        //     img: elm.poster_path,
-                        //   }),
-                        // );
-                      }}
+                      onClick={() => addItemTotheWatchlistHelper(elm, dispatch)}
                       className={styles.link2}
                     >
                       Add to Watchlist

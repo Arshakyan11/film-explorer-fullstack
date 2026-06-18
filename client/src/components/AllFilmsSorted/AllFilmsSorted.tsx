@@ -1,32 +1,30 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { star } from "../Images";
 import { Link, NavLink } from "react-router-dom";
 import Pagination from "../Pagination/Pagination";
 
-import { useDispatch, useSelector } from "react-redux";
-import { watchlistAddingToUser } from "../../store/actions/watchlistAction";
 import "./AllFilmsSorted.scss";
 import { ROUTES } from "../../routes/Routes";
 import {
   gettingCurrentPage,
   gettingDataPage,
   gettingUserData,
-  sendingData,
 } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
 import { getFilmByWantedPageThunk } from "../../store/api/api";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import { addItemTotheWatchlistHelper } from "../../helpers/createUserFrom";
 
 const AllFilmsSorted = ({ idByPagesMovies = 1 }) => {
-  const isLogged = useSelector(gettingUserData);
-  const dispatch = useDispatch();
-  const data = useSelector(gettingDataPage);
-  const currentPage = useSelector(gettingCurrentPage);
+  const isLogged = useAppSelector(gettingUserData);
+  const dispatch = useAppDispatch();
+  const data = useAppSelector(gettingDataPage);
+  const currentPage = useAppSelector(gettingCurrentPage);
   useEffect(() => {
     dispatch(
       getFilmByWantedPageThunk({
         pageArgument: idByPagesMovies,
       }),
     );
-    dispatch(sendingData(JSON.parse(localStorage.getItem("usersInfo"))));
   }, []);
 
   return (
@@ -41,7 +39,7 @@ const AllFilmsSorted = ({ idByPagesMovies = 1 }) => {
         </div>
         <Pagination currentPage={currentPage} idByPages={idByPagesMovies} />
         <div className={"allfilmsSection_data"}>
-          {data.map((elm) => {
+          {data?.map((elm) => {
             return (
               <div key={elm.id} className={"allfilmsSection_data_eachBox"}>
                 <div className={"eachBox_left"}>
@@ -80,14 +78,7 @@ const AllFilmsSorted = ({ idByPagesMovies = 1 }) => {
                   {isLogged ? (
                     <button
                       onClick={() =>
-                        dispatch(
-                          watchlistAddingToUser(isLogged.id, {
-                            page: currentPage,
-                            id: elm.id,
-                            title: elm.original_title,
-                            img: elm.poster_path,
-                          }),
-                        )
+                        addItemTotheWatchlistHelper(elm, dispatch, currentPage)
                       }
                       className="link2"
                     >

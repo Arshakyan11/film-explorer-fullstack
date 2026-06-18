@@ -46,6 +46,7 @@ export const deleteItemFromWatchlistService = async (
     });
     return {
       message: "Item removed from watchlist successfully",
+      movieId: watchlistItemID,
     };
   } catch (error: any) {
     if (error.code === "P2025") {

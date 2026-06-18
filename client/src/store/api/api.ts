@@ -7,6 +7,7 @@ import {
   getFilmTrailerService,
 } from "../../services/films.service";
 import type {
+  AddItemToWatchlistReqType,
   AllPlansResponseType,
   GetFilmByWantedPageReqType,
   GetFilmByWantedPageThunkType,
@@ -37,6 +38,11 @@ import {
   getAllPlansService,
   saveNewPlanOfAccountService,
 } from "../../services/plans.service";
+import {
+  addItemtoWatchlistService,
+  getWatchlistService,
+  removeItemOfWatchlistService,
+} from "../../services/watchlist.service";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_FILM_MAIN_URL,
@@ -241,6 +247,54 @@ export const getFilmsForSectionDisplayThunk = createAsyncThunk<
     } catch (error) {
       return rejectWithValue(
         extractErrorMessage(error, "Error while getting films for sections"),
+      );
+    }
+  },
+);
+
+export const getWatchlistThunk = createAsyncThunk<
+  any[],
+  void,
+  { rejectValue: string }
+>("watchlist/getWatchlistThunk", async (_, { rejectWithValue }) => {
+  try {
+    const res = await getWatchlistService();
+    return res;
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while getting watchlist"),
+    );
+  }
+});
+
+export const addItemtoWatchlistThunk = createAsyncThunk<
+  { message: string },
+  AddItemToWatchlistReqType,
+  { rejectValue: string }
+>("watchlist/addItemtoWatchlistThunk", async (data, { rejectWithValue }) => {
+  try {
+    const res = await addItemtoWatchlistService(data);
+    return res;
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while adding watchlist"),
+    );
+  }
+});
+
+export const removeItemOfWatchlistThunk = createAsyncThunk<
+  { message: string; movieId: number },
+  string,
+  { rejectValue: string }
+>(
+  "watchlist/removeItemOfWatchlistThunk",
+  async (movieId, { rejectWithValue }) => {
+    try {
+      const res = await removeItemOfWatchlistService(movieId);
+      return res;
+    } catch (error) {
+      return rejectWithValue(
+        extractErrorMessage(error, "Error while adding watchlist"),
       );
     }
   },

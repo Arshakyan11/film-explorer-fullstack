@@ -7,7 +7,7 @@ import loginReducer from "../LoginSlice/LoginSlice.ts";
 import plansReducer from "../PlansSlice/PlansSlice.ts";
 import profileReducer from "../ProfileSlice/ProfileSlice.ts";
 import AuthReducer from "../AuthSlice/AuthSlice.ts";
-import { watchlistReducer } from "./watchlistReducer";
+import watchlistReducer from "../WatchlistSlice/WatchlistSlice.ts";
 import { searchingEachReducer } from "./searchingEachReducer";
 
 const reducers = combineReducers({

@@ -1,30 +1,32 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./Watchlist.module.scss";
 import { ROUTES } from "../../routes/Routes";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateMovie,
-  watchlistRemovingToUser,
-} from "../../store/actions/watchlistAction";
-import { globalData } from "../../store/selectors/watchlistSelector";
 import { notifyforRemoving } from "../../helpers/notifyUser";
 import { filmNotFound } from "../../components/Images";
 import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
+import { getAllWatchlistInfo } from "../../store/WatchlistSlice/WatchlistSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import { getUserInfo } from "../../store/AuthSlice/AuthSlice";
+import {
+  getWatchlistThunk,
+  removeItemOfWatchlistThunk,
+} from "../../store/api/api";
 
 const Watchlist = () => {
-  const userData = JSON.parse(localStorage.getItem("usersInfo")) || [];
-  const dispatch = useDispatch();
-  const { watchlist } = useSelector(globalData);
+  const { userInfo } = useAppSelector(getUserInfo);
+  const dispatch = useAppDispatch();
+  const { watchlist } = useAppSelector(getAllWatchlistInfo);
 
   useEffect(() => {
-    let x = JSON.parse(localStorage.getItem("usersInfo"));
-    dispatch(updateMovie(x));
+    dispatch(getWatchlistThunk());
   }, []);
+
+  if (!userInfo) return null;
   return (
     <section className={styles.sectionWatchlist}>
       <div className={styles.container}>
-        <ProfileNavBar userData={userData} forWhich={"forWhatchlist"} />
+        <ProfileNavBar userInfo={userInfo} forWhich={"forWhatchlist"} />
         <div className={styles.watchlist}>
           <p>Your Watchlist</p>
           <div className={styles.watchlistBox}>
@@ -44,7 +46,7 @@ const Watchlist = () => {
                     <h3> {movie.title}</h3>
                     <Link
                       className={styles.link1}
-                      to={`/${ROUTES.MOVIES}/${movie.page}/${movie.id}`}
+                      to={`/${ROUTES.MOVIES}/${movie.page}/${movie.movieId}`}
                     >
                       See More
                     </Link>
@@ -52,7 +54,9 @@ const Watchlist = () => {
                       className={styles.link2}
                       onClick={() => {
                         notifyforRemoving();
-                        dispatch(watchlistRemovingToUser(userData.id, movie));
+                        dispatch(
+                          removeItemOfWatchlistThunk(String(movie.movieId)),
+                        );
                       }}
                     >
                       Remove from <br /> Watchlist

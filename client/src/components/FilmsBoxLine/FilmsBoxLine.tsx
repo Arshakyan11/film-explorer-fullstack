@@ -1,31 +1,25 @@
-import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { star } from "../Images";
 import { ROUTES } from "../../routes/Routes";
-import { useDispatch, useSelector } from "react-redux";
-import { paginationGetting } from "../../store/actions/paginationAction";
-import { globalPagination } from "../../store/selectors/paginationSelectors";
 
 import styles from "./FilmsBoxLine.module.scss";
 import { watchlistAddingToUser } from "../../store/actions/watchlistAction";
 import { getFilmByWantedPageThunk } from "../../store/api/api";
+import { isTokenValid } from "../../helpers/checkToken";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import { getAllPaginationInfo } from "../../store/PaginationSlice/PaginationSlice";
 
 const FilmsBoxLine = ({
   moviesCategory,
-  currentP,
   forMoviesOnly,
   typofMovieSection,
-  requestType,
   dataType,
   forRecomndOnly,
 }) => {
-  const dispatch = useDispatch();
-  const { data } = useSelector(globalPagination);
-  const isLogged = JSON.parse(localStorage.getItem("usersInfo"));
+  const dispatch = useAppDispatch();
+  const { data } = useAppSelector(getAllPaginationInfo);
+  const isLogged = isTokenValid();
 
-  useEffect(() => {
-    dispatch(paginationGetting(requestType, 6, currentP));
-  }, []);
   return (
     <section>
       <div className={styles.filmsLineSection}>
@@ -79,14 +73,14 @@ const FilmsBoxLine = ({
                   {isLogged ? (
                     <button
                       onClick={() => {
-                        dispatch(
-                          watchlistAddingToUser(isLogged.id, {
-                            page: 7,
-                            id: elm.id,
-                            title: elm.original_title,
-                            img: elm.poster_path,
-                          }),
-                        );
+                        // dispatch(
+                        //   watchlistAddingToUser(isLogged.id, {
+                        //     page: 7,
+                        //     id: elm.id,
+                        //     title: elm.original_title,
+                        //     img: elm.poster_path,
+                        //   }),
+                        // );
                       }}
                       className={styles.link2}
                     >

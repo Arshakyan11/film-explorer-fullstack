@@ -9,6 +9,10 @@ export type GetFilmByWantedPageReqType = {
   idArgument?: number;
 };
 
+export type GetFilmsForSectionResponseType = {
+  films: any[];
+};
+
 export type GetOneMovieThunkType = {
   data: any[];
   page: number;

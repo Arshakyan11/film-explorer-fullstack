@@ -3,12 +3,14 @@ import { notifyforAdding, notifyforisExisting } from "../../helpers/notifyUser";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getFilmByWantedPageService,
+  getFilmsForSectionDisplayService,
   getFilmTrailerService,
 } from "../../services/films.service";
 import type {
   AllPlansResponseType,
   GetFilmByWantedPageReqType,
   GetFilmByWantedPageThunkType,
+  GetFilmsForSectionResponseType,
   GetOneMovieReqType,
   GetOneMovieThunkType,
   SavePlanOfTheAccountResType,
@@ -226,47 +228,36 @@ export const getCurretUserInfoThunk = createAsyncThunk<
   }
 });
 
+export const getFilmsForSectionDisplayThunk = createAsyncThunk<
+  GetFilmsForSectionResponseType[],
+  void,
+  { rejectValue: string }
+>(
+  "pagination/getFilmsForSectionDisplayThunk",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await getFilmsForSectionDisplayService();
+      return res.results;
+    } catch (error) {
+      return rejectWithValue(
+        extractErrorMessage(error, "Error while getting films for sections"),
+      );
+    }
+  },
+);
+
 export const Axios = {
   getFromFirstPage() {
     return instance({ url: "top_rated?language=en-US&page=7" });
   },
-  getDataByWantedPage(pageRcv) {
-    return instance({
-      url: `top_rated?language=en-US&page=${pageRcv ? pageRcv : 1}`,
-    });
-  }, // done
   getDataByQuery(querry) {
     return instance({
       baseURL: `https://api.themoviedb.org/3/search/movie?query=${querry}&include_adult=false`,
     });
   },
-  getTrailer(movieId) {
-    return instance({
-      baseURL: `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
-    });
-  }, //done
 };
 
 export const LocalAxios = {
-  addUserToLocalPageAndData(dataRcv) {
-    return localInstanceUsers({
-      method: "POST",
-      data: dataRcv,
-    });
-  },
-  checkingLocalData() {
-    return localInstanceUsers({ method: "GET" });
-  },
-  patchingPlans(userId, dataRcv) {
-    const object = {
-      selectedPlans: dataRcv,
-    };
-    return localInstanceUsers({
-      url: `/${userId}`,
-      method: "PATCH",
-      data: object,
-    });
-  },
   patchingWatchList(userId, dataRcv) {
     return localInstanceUsers({
       url: `/${userId}`,
@@ -308,13 +299,6 @@ export const LocalAxios = {
           data: object,
         });
       }
-    });
-  },
-  changingUserInfo(userId, dataRcv) {
-    return localInstanceUsers({
-      url: `/${userId}`,
-      method: "PUT",
-      data: dataRcv,
     });
   },
 };

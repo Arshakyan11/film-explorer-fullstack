@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
-import FilmsBoxLine from "../../components/FilmsBoxLine/FilmsBoxLine";
 import { ROUTES } from "../../routes/Routes";
-import {
-  NEW_MOVIES,
-  POPULAR_MOVIES,
-  RECOMENDED_MOVIES,
-} from "../../store/types/paginationTypes";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Movies.module.scss";
 import { gettingGlobal } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
-import { getFilmByWantedPageThunk } from "../../store/api/api";
+import {
+  getFilmByWantedPageThunk,
+  getFilmsForSectionDisplayThunk,
+} from "../../store/api/api";
+import FilmsBoxLine from "../../components/FilmsBoxLine/FilmsBoxLine";
 
 const Movies = () => {
   let forMoviesOnly = true;
@@ -23,6 +21,7 @@ const Movies = () => {
         idArgument: 11324,
       }),
     );
+    dispatch(getFilmsForSectionDisplayThunk());
   }, []);
 
   return (
@@ -50,27 +49,21 @@ const Movies = () => {
           <div className={styles.movieSection_filmsBox}>
             <FilmsBoxLine
               moviesCategory="Popular Movies"
-              currentP={1}
               forMoviesOnly={forMoviesOnly}
               typofMovieSection={`/${ROUTES.POPULARMOVIES}`}
               dataType="popularMovies"
-              requestType={POPULAR_MOVIES}
             />
             <FilmsBoxLine
               moviesCategory="New Movies"
-              currentP={2}
               forMoviesOnly={forMoviesOnly}
               typofMovieSection={`/${ROUTES.NEWMOVIES}`}
               dataType="newMovies"
-              requestType={NEW_MOVIES}
             />
             <FilmsBoxLine
               moviesCategory="Recomended Movies"
-              currentP={3}
               forMoviesOnly={forMoviesOnly}
               typofMovieSection={`/${ROUTES.RECOMENDEDMOVIES}`}
               dataType="recomendedMovies"
-              requestType={RECOMENDED_MOVIES}
               forRecomndOnly={true}
             />
           </div>

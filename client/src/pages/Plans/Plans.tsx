@@ -1,76 +1,97 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaList } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import styles from "./Plans.module.scss";
 import { ecoPayz, logo, payPal, tv } from "../../components/Images";
-import { useDispatch, useSelector } from "react-redux";
-import { plansData } from "../../store/selectors/plansSelectors";
-import {
-  exportingSelectedPlan,
-  makeUserData,
-  plansGettingData,
-  selectedCurrentPlan,
-} from "../../store/actions/plansActions";
 import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import { allPlansInfo } from "../../store/PlansSlice/PlansSlice";
+import { getUserInfo, setUserInfo } from "../../store/AuthSlice/AuthSlice";
+import { useAsyncAction } from "../../hooks/useAsyncAction";
+import {
+  getAllPlansThunk,
+  saveNewPlanOfAccountThunk,
+} from "../../store/api/api";
+import { ROUTES } from "../../routes/Routes";
+import type { AllPlansResponseType } from "../../types/apiHandlingTypes";
 
 const Plans = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { userData, plans, selectedPlans, total } = useSelector(plansData);
+  const run = useAsyncAction();
+  const { userInfo } = useAppSelector(getUserInfo);
+  const { plansList } = useAppSelector(allPlansInfo);
+  const [selectedPlan, setSelectedPlan] = useState<AllPlansResponseType>();
+  const [total, setTotal] = useState<number>(0);
   useEffect(() => {
-    dispatch(plansGettingData());
-    dispatch(makeUserData(JSON.parse(localStorage.getItem("usersInfo"))));
-  }, []);
+    dispatch(getAllPlansThunk());
+  }, [dispatch]);
 
-  const handleSelectPlan = (plan) => {
-    dispatch(selectedCurrentPlan(plan, plan.price));
+  const handleSelectPlan = async (plan: AllPlansResponseType) => {
+    const result = await run({
+      action: () =>
+        dispatch(
+          saveNewPlanOfAccountThunk({ subscriptionId: plan.id }),
+        ).unwrap(),
+      successMessage: (res) => res.message,
+    });
+    if (result && userInfo) {
+      const updatedUser = {
+        ...userInfo,
+        subscription: plan,
+      };
+      dispatch(setUserInfo(updatedUser));
+      localStorage.setItem("userInfo", JSON.stringify(updatedUser));
+      navigate(`/${ROUTES.PROFILE}`);
+    }
   };
 
-  const handleRenew = () => {
-    if (!userData.id || !selectedPlans) {
-      alert("Error: userData.id or selectedPlans is not defined");
-      return;
-    }
-    dispatch(exportingSelectedPlan(userData.id, selectedPlans, navigate));
-    dispatch(selectedCurrentPlan(null, 0));
+  const selectPlan = (plan: AllPlansResponseType) => {
+    setSelectedPlan(plan);
+    setTotal(plan.price);
   };
 
   const getUpgradeText = () => {
-    switch (selectedPlans?.name) {
-      case "OnAir Freemium":
+    switch (selectedPlan?.id) {
+      case "1":
         return "Watch 50+ live TV channels";
-      case "OnAir Premium":
+      case "2":
         return "Watch 200+ live TV channels";
-      case "OnAir Premium 2":
+      case "3":
         return "Watch 300+ live TV channels";
       default:
         return "Watch 50+ live TV channels";
     }
   };
+  if (!userInfo) return null;
 
   return (
     <div className={styles.sectionProfile}>
       <div className={styles.container}>
-        <ProfileNavBar forWhich={"forPlans"} userData={userData} />
+        <ProfileNavBar forWhich={"forPlans"} userInfo={userInfo} />
         <main className={styles.mainContent}>
           <h2 className={styles.title}>
             <FaList size={20} /> Plans
           </h2>
           <div className={styles.plansList}>
-            {plans.map((plan) => (
+            {plansList?.map((plan) => (
               <div
                 key={plan.id}
                 className={`${styles.planItem} ${
-                  selectedPlans?.id === plan.id ? styles.selected : ""
+                  selectedPlan?.id === plan.id ? styles.selected : ""
                 }`}
-                onClick={() => handleSelectPlan(plan)}
+                onClick={() => selectPlan(plan)}
               >
                 {plan.name} <span>{plan.price}$</span>
               </div>
             ))}
           </div>
           <div className={styles.renewSection}>
-            <button className={styles.renewButton} onClick={handleRenew}>
+            <button
+              disabled={!selectedPlan}
+              className={styles.renewButton}
+              onClick={() => selectedPlan && handleSelectPlan(selectedPlan)}
+            >
               Change Plan
             </button>
             <p className={styles.total}>
@@ -81,13 +102,13 @@ const Plans = () => {
           <section className={styles.upgradeSection}>
             <h2 className={styles.upgradeSectionTitle}>Upgrade your service</h2>
             <div className={styles.plansList2}>
-              {plans.map((plan) => (
+              {plansList?.map((plan) => (
                 <div
                   key={plan.id}
                   className={`${styles.planItem2} ${
-                    selectedPlans?.id === plan.id ? styles.selected2 : ""
+                    selectedPlan?.id === plan.id ? styles.selected2 : ""
                   }`}
-                  onClick={() => handleSelectPlan(plan)}
+                  onClick={() => selectPlan(plan)}
                 >
                   {plan.name}
                   <span>{plan.price}$</span>
@@ -108,9 +129,15 @@ const Plans = () => {
                   </div>
                   <div className={styles.tvTotal}>
                     <p className={styles.total2}>
-                      <strong>{total == 0 ? "35" : total}$</strong>
+                      <strong>{total === 0 ? "35" : total}$</strong>
                     </p>
-                    <button className={styles.tvBtn} onClick={handleRenew}>
+                    <button
+                      disabled={!selectedPlan}
+                      className={styles.tvBtn}
+                      onClick={() =>
+                        selectedPlan && handleSelectPlan(selectedPlan)
+                      }
+                    >
                       Change Plan
                     </button>
                   </div>
@@ -119,7 +146,7 @@ const Plans = () => {
               <div className={styles.verticalLine}></div>
               <div className={styles.paymentMethods}>
                 <h3>Your current service</h3>
-                <p>{userData.selectedPlans?.name || "No Plan Selected"}</p>
+                <p>{userInfo.subscription?.name || "No Plan Selected"}</p>
                 <div className={styles.total}>
                   <hr />
                   <div className={styles.totalText}>

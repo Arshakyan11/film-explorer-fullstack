@@ -17,7 +17,7 @@ import type { SignInUserInfoType } from "../../types/formTypes";
 
 interface ProfileNavBarProps {
   userInfo: SignInUserInfoType;
-  isEditing: boolean;
+  isEditing?: boolean;
   forWhich: string;
 }
 

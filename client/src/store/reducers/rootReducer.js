@@ -4,7 +4,7 @@ import EachFilmReducer from "../EachFilmSlice/EachFilmSlice.ts";
 import allDataReducer from "../AllFilmDataSlice/AllFilmDataSlice.ts";
 import registrationReducer from "../RegistrationSlice/RegistrationSlice.ts";
 import loginReducer from "../LoginSlice/LoginSlice.ts";
-import { plansReducer } from "./plansReducer";
+import plansReducer from "../PlansSlice/PlansSlice.ts";
 import profileReducer from "../ProfileSlice/ProfileSlice.ts";
 import AuthReducer from "../AuthSlice/AuthSlice.ts";
 import { watchlistReducer } from "./watchlistReducer";

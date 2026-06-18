@@ -24,3 +24,12 @@ export type TrailerResponseType = {
   trailerKey: string | null;
 };
 
+export type AllPlansResponseType = {
+  id: string;
+  name: string;
+  price: number;
+};
+
+export type SavePlanOfTheAccountResType = {
+  subscriptionId: string;
+};

@@ -9,7 +9,7 @@ import NewMovies from "./NewMovies/NewMovies.jsx";
 import Registration from "./Registration/Registration.tsx";
 import Login from "./Login/Login.tsx";
 import Profile from "./Profile/Profile.tsx";
-import Plans from "./Plans/Plans.jsx";
+import Plans from "./Plans/Plans.tsx";
 import Watchlist from "./Watchlist/Watchlist.jsx";
 import SearchResults from "./SearchResults/SearchResults.jsx";
 import Searching from "./Searching/Searching.jsx";

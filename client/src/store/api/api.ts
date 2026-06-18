@@ -6,10 +6,12 @@ import {
   getFilmTrailerService,
 } from "../../services/films.service";
 import type {
+  AllPlansResponseType,
   GetFilmByWantedPageReqType,
   GetFilmByWantedPageThunkType,
   GetOneMovieReqType,
   GetOneMovieThunkType,
+  SavePlanOfTheAccountResType,
   TrailerResponseType,
 } from "../../types/apiHandlingTypes";
 import {
@@ -29,6 +31,10 @@ import type {
   SignInUserInfoType,
   SignInUserSendingType,
 } from "../../types/formTypes";
+import {
+  getAllPlansService,
+  saveNewPlanOfAccountService,
+} from "../../services/plans.service";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_FILM_MAIN_URL,
@@ -171,6 +177,36 @@ export const resetPasswordThunk = createAsyncThunk<
   } catch (error) {
     return rejectWithValue(
       extractErrorMessage(error, "Error while reseting password"),
+    );
+  }
+});
+
+export const getAllPlansThunk = createAsyncThunk<
+  AllPlansResponseType[],
+  void,
+  { rejectValue: string }
+>("plans/getAllPLansThunk", async (_, { rejectWithValue }) => {
+  try {
+    const res = await getAllPlansService();
+    return res;
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while getting plans"),
+    );
+  }
+});
+
+export const saveNewPlanOfAccountThunk = createAsyncThunk<
+  { message: string },
+  SavePlanOfTheAccountResType,
+  { rejectValue: string }
+>("plans/saveNewPlanOfAccountThunk", async (data, { rejectWithValue }) => {
+  try {
+    const res = await saveNewPlanOfAccountService(data);
+    return res;
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while saving plan"),
     );
   }
 });

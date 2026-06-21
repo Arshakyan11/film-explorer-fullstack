@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { ROUTES } from "../../routes/Routes.jsx";
-import { logo, searchImg, signIn } from "../Images.jsx";
+import { ROUTES } from "../../routes/Routes";
+import { logo, searchImg, signIn } from "../Images";
 import { FaAddressCard, FaBars, FaReceipt, FaVideo } from "react-icons/fa";
 import { FaHouse, FaMagnifyingGlass, FaRightToBracket } from "react-icons/fa6";
 
-import { LogoutFromAccount } from "../../helpers/logOut.js";
-import { HandleSearch } from "../../helpers/searchHelper.js";
+import { LogoutFromAccount } from "../../helpers/logOut";
+import { HandleSearch } from "../../helpers/searchHelper";
 
 import "./NavBar.scss";
-import { isTokenValid } from "../../helpers/checkToken.js";
-import { useAppDispatch, useAppSelector } from "../../app/store.js";
+import { isTokenValid } from "../../helpers/checkToken";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 
-import { getFilmsByQueryThunk } from "../../store/api/api.js";
+import { getFilmsByQueryThunk } from "../../store/api/api";
 import {
   searchingEachData,
   setingSearchResult,
   transferData,
-} from "../../store/SearchingEachSlice/SearchingEachSlice.js";
+} from "../../store/SearchingEachSlice/SearchingEachSlice";
 
 const NavBar = () => {
   const navigate = useNavigate();

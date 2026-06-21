@@ -40,3 +40,9 @@ export type ResetPasswordSendingType = {
   password: string;
   newPassword: string;
 };
+
+export type ProfileFormValues = {
+  password: string;
+  newPassword: string;
+  newPasswordRepeat: string;
+};

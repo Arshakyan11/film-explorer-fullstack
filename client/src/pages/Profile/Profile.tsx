@@ -1,6 +1,6 @@
 import styles from "./Profile.module.scss";
 import { FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik, type FormikHelpers } from "formik";
 import { validationProfile } from "../../helpers/useValidation";
 
 import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
@@ -11,6 +11,7 @@ import {
   profilePasswordSee,
 } from "../../store/ProfileSlice/ProfileSlice";
 import { getUserInfo } from "../../store/AuthSlice/AuthSlice";
+import type { ProfileFormValues } from "../../types/formTypes";
 
 const Profile = () => {
   const { isHiden, isEditing, initialValues } =
@@ -18,11 +19,13 @@ const Profile = () => {
   const dispatch = useAppDispatch();
   const { userInfo } = useAppSelector(getUserInfo);
 
-  const handleSave = (e, fornik) => {
+  const handleSave = (
+    e: ProfileFormValues,
+    formik: FormikHelpers<ProfileFormValues>,
+  ) => {
     const { newPasswordRepeat, ...resetData } = e;
     console.log(resetData);
-
-    editiingProfileInfo(resetData, fornik, dispatch);
+    editiingProfileInfo(resetData, formik, dispatch);
   };
   if (!userInfo) return null;
   return (
@@ -41,7 +44,7 @@ const Profile = () => {
             <Formik
               validationSchema={validationProfile}
               initialValues={initialValues}
-              onSubmit={(e, formik) => handleSave(e, formik)}
+              onSubmit={handleSave}
             >
               <Form>
                 <fieldset>

@@ -1,17 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 import { resetPasswordThunk } from "../api/api";
+import type { ProfileFormValues } from "../../types/formTypes";
 
 export type ProfileSliceType = {
   isLoading: boolean;
   isHiden: boolean;
   isEditing: boolean;
   error: null | string;
-  initialValues: {
-    password: string;
-    newPassword: string;
-    newPasswordRepeat: string;
-  };
+  initialValues: ProfileFormValues;
 };
 const initialState: ProfileSliceType = {
   isHiden: true,

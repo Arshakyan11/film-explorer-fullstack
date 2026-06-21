@@ -11,6 +11,7 @@ import {
 } from "../../store/LoginSlice/LoginSlice";
 import { loginUserHelper } from "../../helpers/createUserFrom";
 import { useAppDispatch, useAppSelector } from "../../app/store";
+import type { SignInUserSendingType } from "../../types/formTypes";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Login = () => {
       <div className={styles.registrationSec}>
         <div className={styles.formBox}>
           <p className={styles.titleofBox}>Login to your Account</p>
-          <Formik
+          <Formik<SignInUserSendingType>
             initialValues={initialValues}
             validationSchema={validationLogin}
             onSubmit={(e) => {

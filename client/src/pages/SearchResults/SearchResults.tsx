@@ -1,13 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { filmNotFound, star } from "../../components/Images";
+import { star } from "../../components/Images";
 import { ROUTES } from "../../routes/Routes";
 import { useDispatch, useSelector } from "react-redux";
-import { searchingEachResult } from "../../store/selectors/searchingEachSelector";
-import {
-  setingSearchResult,
-  setingSearchResultALlData,
-} from "../../store/actions/searchingEachAction";
 
 import styles from "./SearchResults.module.scss";
 import {
@@ -15,6 +10,11 @@ import {
   getTrailerKey,
 } from "../../store/EachFilmSlice/EachFilmSlice";
 import { fetchTrailerThunk } from "../../store/api/api";
+import {
+  searchingEachResult,
+  setingSearchResult,
+  setingSearchResultALlData,
+} from "../../store/SearchingEachSlice/SearchingEachSlice";
 
 const SearchResults = () => {
   const dispatch = useDispatch();

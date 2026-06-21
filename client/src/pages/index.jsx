@@ -11,7 +11,7 @@ import Login from "./Login/Login.tsx";
 import Profile from "./Profile/Profile.tsx";
 import Plans from "./Plans/Plans.tsx";
 import Watchlist from "./Watchlist/Watchlist.tsx";
-import SearchResults from "./SearchResults/SearchResults.jsx";
+import SearchResults from "./SearchResults/SearchResults.tsx";
 import Searching from "./Searching/Searching.tsx";
 import TermsOfUse from "./TermsOfUse/TermsOfUse.jsx";
 import PolicyPage from "./PolicyPage/PolicyPage.jsx";

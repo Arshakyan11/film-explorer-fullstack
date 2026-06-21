@@ -1,17 +1,18 @@
 import { HandleSearchMAIN } from "../../helpers/searchHelper";
 import { filmNotFound, searchImg, star } from "../../components/Images";
 import { ROUTES } from "../../routes/Routes";
-import {
-  recivingDataMAIN,
-  setingSearchResult,
-} from "../../store/actions/searchingEachAction";
+
 import { Link, NavLink } from "react-router-dom";
-import { searchingEachDataMAIN } from "../../store/selectors/searchingEachSelector";
 
 import styles from "./Searching.module.scss";
 import { isTokenValid } from "../../helpers/checkToken";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import { addItemTotheWatchlistHelper } from "../../helpers/createUserFrom";
+import {
+  searchingEachDataMAIN,
+  setingSearchResult,
+} from "../../store/SearchingEachSlice/SearchingEachSlice";
+import { getFilmsByQueryThunk } from "../../store/api/api";
 
 const Searching = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +28,11 @@ const Searching = () => {
               type="text"
               placeholder="Search movies..."
               onChange={(e) => {
-                HandleSearchMAIN(e.target.value, dispatch, recivingDataMAIN);
+                HandleSearchMAIN(
+                  e.target.value,
+                  dispatch,
+                  getFilmsByQueryThunk,
+                );
               }}
             />
           </div>

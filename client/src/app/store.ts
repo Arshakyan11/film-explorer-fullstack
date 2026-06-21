@@ -13,6 +13,7 @@ import AuthReducer from "../store/AuthSlice/AuthSlice";
 import PlansReducer from "../store/PlansSlice/PlansSlice";
 import PaginationReducer from "../store/PaginationSlice/PaginationSlice";
 import WatchlistReducer from "../store/WatchlistSlice/WatchlistSlice";
+import SearchingEachReducer from "../store/SearchingEachSlice/SearchingEachSlice";
 const store = configureStore({
   reducer: {
     allFilmsData: AllFilmDataReducer,
@@ -24,6 +25,7 @@ const store = configureStore({
     plans: PlansReducer,
     pagination: PaginationReducer,
     watchlist: WatchlistReducer,
+    searchingEach: SearchingEachReducer,
   },
 });
 

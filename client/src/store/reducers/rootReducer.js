@@ -8,7 +8,7 @@ import plansReducer from "../PlansSlice/PlansSlice.ts";
 import profileReducer from "../ProfileSlice/ProfileSlice.ts";
 import AuthReducer from "../AuthSlice/AuthSlice.ts";
 import watchlistReducer from "../WatchlistSlice/WatchlistSlice.ts";
-import { searchingEachReducer } from "./searchingEachReducer";
+import searchingEachReducer from "../SearchingEachSlice/SearchingEachSlice.ts";
 
 const reducers = combineReducers({
   pagination: paginationReducer,

@@ -1,36 +1,41 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { ROUTES } from "../../routes/Routes";
-import { logo, searchImg, signIn } from "../Images";
-import { useDispatch, useSelector } from "react-redux";
+import { ROUTES } from "../../routes/Routes.jsx";
+import { logo, searchImg, signIn } from "../Images.jsx";
 import { FaAddressCard, FaBars, FaReceipt, FaVideo } from "react-icons/fa";
 import { FaHouse, FaMagnifyingGlass, FaRightToBracket } from "react-icons/fa6";
-import { searchingEachData } from "../../store/selectors/searchingEachSelector.js";
-import {
-  recivingData,
-  recivingDataMAIN,
-  setingSearchResult,
-  transferData,
-} from "../../store/actions/searchingEachAction.js";
+
 import { LogoutFromAccount } from "../../helpers/logOut.js";
 import { HandleSearch } from "../../helpers/searchHelper.js";
 
 import "./NavBar.scss";
 import { isTokenValid } from "../../helpers/checkToken.js";
+import { useAppDispatch, useAppSelector } from "../../app/store.js";
+import {
+  searchingEachData,
+  setingSearchResult,
+  transferData,
+} from "../../store/SearchingEachSlice/SearchingEachSlice.js";
+import { getFilmsByQueryThunk } from "../../store/api/api.js";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isLogged = isTokenValid();
-  const searchResults = useSelector(searchingEachData);
-  const [isOpen, setIsOpen] = useState(false);
-  const inputRef = useRef(null);
-  const searchRef = useRef(null);
+  const searchResults = useAppSelector(searchingEachData);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const clickOutside = (e) => {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        dispatch(recivingData(""));
+    const clickOutside = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        dispatch(
+          getFilmsByQueryThunk({
+            query: "",
+            searchType: "navigationSearch",
+          }),
+        );
       }
     };
     document.addEventListener("mousedown", clickOutside);
@@ -90,10 +95,10 @@ const NavBar = () => {
                   placeholder="Search movies..."
                   ref={inputRef}
                   onChange={(e) =>
-                    HandleSearch(e.target.value, dispatch, recivingData)
+                    HandleSearch(e.target.value, dispatch, getFilmsByQueryThunk)
                   }
                   onClick={(e) =>
-                    HandleSearch(e.target.value, dispatch, recivingData)
+                    HandleSearch(e.target.value, dispatch, getFilmsByQueryThunk)
                   }
                 />
                 {searchResults.length > 0 && (
@@ -110,7 +115,12 @@ const NavBar = () => {
                               JSON.stringify([searchResults, [movie]]),
                             );
                             dispatch(transferData());
-                            dispatch(recivingData(""));
+                            dispatch(
+                              getFilmsByQueryThunk({
+                                query: "",
+                                searchType: "navigationSearch",
+                              }),
+                            );
                             dispatch(setingSearchResult([movie]));
                             if (inputRef.current) {
                               inputRef.current.value = "";
@@ -126,7 +136,12 @@ const NavBar = () => {
                         className="exploreMore"
                         to={`/${ROUTES.SEARCHING}`}
                         onClick={() => {
-                          dispatch(recivingDataMAIN(inputRef.current.value));
+                          dispatch(
+                            getFilmsByQueryThunk({
+                              query: inputRef.current.value,
+                              searchType: "mainSearch",
+                            }),
+                          );
                         }}
                       >
                         EXPLORE RELATED FILMS
@@ -259,10 +274,18 @@ const NavBar = () => {
                     placeholder="Search movies..."
                     ref={inputRef}
                     onChange={(e) =>
-                      HandleSearch(e.target.value, dispatch, recivingData)
+                      HandleSearch(
+                        e.target.value,
+                        dispatch,
+                        getFilmsByQueryThunk,
+                      )
                     }
                     onClick={(e) =>
-                      HandleSearch(e.target.value, dispatch, recivingData)
+                      HandleSearch(
+                        e.target.value,
+                        dispatch,
+                        getFilmsByQueryThunk,
+                      )
                     }
                   />
                   {searchResults.length > 0 && (
@@ -279,7 +302,12 @@ const NavBar = () => {
                                 JSON.stringify([searchResults, [movie]]),
                               );
                               dispatch(transferData());
-                              dispatch(recivingData(""));
+                              dispatch(
+                                getFilmsByQueryThunk({
+                                  query: "",
+                                  searchType: "navigationSearch",
+                                }),
+                              );
                               dispatch(setingSearchResult([movie]));
                               setIsOpen(false);
                               if (inputRef.current) {
@@ -296,9 +324,19 @@ const NavBar = () => {
                           className="exploreMore"
                           to={`/${ROUTES.SEARCHING}`}
                           onClick={() => {
-                            dispatch(recivingDataMAIN(inputRef.current.value));
+                            dispatch(
+                              getFilmsByQueryThunk({
+                                query: inputRef.current.value,
+                                searchType: "mainSearch",
+                              }),
+                            );
                             setIsOpen(false);
-                            dispatch(recivingData(""));
+                            dispatch(
+                              getFilmsByQueryThunk({
+                                query: "",
+                                searchType: "navigationSearch",
+                              }),
+                            );
                           }}
                         >
                           EXPLORE RELATED FILMS

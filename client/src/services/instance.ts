@@ -3,14 +3,12 @@ import axios from "axios";
 export const mainInstance = axios.create({
   baseURL: import.meta.env.VITE_FILM_MAIN_URL,
   method: "GET",
+  timeout: 10000,
+  timeoutErrorMessage: "Request timeout",
   headers: {
     accept: "application/json",
     Authorization: import.meta.env.VITE_FILM_TOKEN,
   },
-});
-
-export const localInstanceUsers = axios.create({
-  baseURL: "http://localhost:8000/users",
 });
 
 export const apiClient = axios.create({

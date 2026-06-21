@@ -1,8 +1,8 @@
 import axios from "axios";
-import { notifyforAdding, notifyforisExisting } from "../../helpers/notifyUser";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getFilmByWantedPageService,
+  getFilmsByQueryService,
   getFilmsForSectionDisplayService,
   getFilmTrailerService,
 } from "../../services/films.service";
@@ -17,10 +17,7 @@ import type {
   SavePlanOfTheAccountResType,
   TrailerResponseType,
 } from "../../types/apiHandlingTypes";
-import {
-  extractErrorMessage,
-  localInstanceUsers,
-} from "../../services/instance";
+import { extractErrorMessage } from "../../services/instance";
 import {
   getUserInfoService,
   loginService,
@@ -301,9 +298,6 @@ export const removeItemOfWatchlistThunk = createAsyncThunk<
 );
 
 export const Axios = {
-  getFromFirstPage() {
-    return instance({ url: "top_rated?language=en-US&page=7" });
-  },
   getDataByQuery(querry) {
     return instance({
       baseURL: `https://api.themoviedb.org/3/search/movie?query=${querry}&include_adult=false`,
@@ -311,60 +305,28 @@ export const Axios = {
   },
 };
 
-export const LocalAxios = {
-  patchingWatchList(userId, dataRcv) {
-    return localInstanceUsers({
-      url: `/${userId}`,
-      method: "GET",
-    }).then((res) => {
-      const previousWatchlist = res.data.watchlist || [];
-      const object = {
-        watchlist: [...previousWatchlist, dataRcv],
-      };
-      const isAddeed = previousWatchlist?.every((elm) => elm.id !== dataRcv.id);
-      if (isAddeed) {
-        notifyforAdding();
-        return localInstanceUsers({
-          url: `/${userId}`,
-          method: "PATCH",
-          data: object,
-        });
-      } else {
-        notifyforisExisting();
-      }
-    });
+export const getFilmsByQueryThunk = createAsyncThunk<
+  {
+    queryName: string;
+    films: any[];
+    searchType: "navigationSearch" | "mainSearch";
   },
-  removingWatchlist(userId, dataRcv) {
-    return localInstanceUsers({
-      url: `/${userId}`,
-      method: "GET",
-    }).then((res) => {
-      const allWatchlist = res.data.watchlist || [];
-      if (allWatchlist) {
-        const updatedWatchlist = allWatchlist?.filter(
-          (item) => item.id !== dataRcv.id,
-        );
-        const object = {
-          watchlist: updatedWatchlist,
-        };
-        return localInstanceUsers({
-          url: `/${userId}`,
-          method: "PATCH",
-          data: object,
-        });
-      }
-    });
+  {
+    query: string;
+    searchType: "navigationSearch" | "mainSearch";
   },
-};
-
-//local querry plans start
-
-const localInstancePlans = axios.create({
-  baseURL: "http://localhost:8000/plans",
+  { rejectValue: string }
+>("searchingEach/getFilmsByQueryThunk", async (data, { rejectWithValue }) => {
+  try {
+    const res = await getFilmsByQueryService(data.query);
+    return {
+      queryName: data.query,
+      films: res.results,
+      searchType: data.searchType,
+    };
+  } catch (error) {
+    return rejectWithValue(
+      extractErrorMessage(error, "Error while searching films"),
+    );
+  }
 });
-
-export const LocalAxiosPlans = {
-  gettAllPlans() {
-    return localInstancePlans({ method: "GET" });
-  },
-};

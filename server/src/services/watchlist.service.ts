@@ -31,7 +31,15 @@ export const getWatchlistService = async (userID: string) => {
   const watchlist = await prisma.watchlistItem.findMany({
     where: { userId: userID },
   });
-  return watchlist;
+  const updatedWatchlist = watchlist.map((item) => {
+    return {
+      movieId: item.movieId,
+      page: item.page,
+      title: item.title,
+      img: item.img,
+    };
+  });
+  return updatedWatchlist;
 };
 
 export const deleteItemFromWatchlistService = async (

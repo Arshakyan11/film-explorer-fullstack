@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 import { getFilmsForSectionDisplayThunk } from "../api/api";
+import type { MovieType } from "../../types/dataTypes";
 
 export type PaginationSliceType = {
   isLoading: boolean;
   error: null | string;
   data: {
-    popularMovies: any[];
-    newMovies: any[];
-    recomendedMovies: any[];
+    popularMovies: MovieType[];
+    newMovies: MovieType[];
+    recomendedMovies: MovieType[];
   };
 };
 const initialState: PaginationSliceType = {
@@ -35,7 +36,6 @@ const PaginationSlice = createSlice({
       (state, action) => {
         state.isLoading = false;
         state.error = null;
-
         const films = action.payload;
         state.data.popularMovies = films.slice(0, 6);
         state.data.newMovies = films.slice(6, 12);

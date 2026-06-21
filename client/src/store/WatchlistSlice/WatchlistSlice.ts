@@ -1,20 +1,16 @@
-import {
-  createSlice,
-  isFulfilled,
-  isPending,
-  isRejected,
-} from "@reduxjs/toolkit";
+import { createSlice, isPending, isRejected } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 import {
   addItemtoWatchlistThunk,
   getWatchlistThunk,
   removeItemOfWatchlistThunk,
 } from "../api/api";
+import type { WatchlistItemType } from "../../types/dataTypes";
 
 export type WatchlistType = {
   isLoading: boolean;
   error: null | string;
-  watchlist: any[];
+  watchlist: WatchlistItemType[];
 };
 const initialState: WatchlistType = {
   isLoading: false,

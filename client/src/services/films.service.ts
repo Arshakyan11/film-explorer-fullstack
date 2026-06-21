@@ -4,6 +4,7 @@ export const getFilmByWantedPageService = async (pageArg: number = 1) => {
   const res = await mainInstance({
     url: `top_rated?language=en-US&page=${pageArg}`,
   });
+  console.log(res.data.results);
   return res.data;
 };
 

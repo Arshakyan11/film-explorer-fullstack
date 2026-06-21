@@ -32,7 +32,7 @@ const Watchlist = () => {
           <div className={styles.watchlistBox}>
             {watchlist?.map((movie) => {
               return (
-                <div key={movie.id} className={styles.eachWatchlistBox}>
+                <div key={movie.movieId} className={styles.eachWatchlistBox}>
                   <img
                     src={
                       movie.img

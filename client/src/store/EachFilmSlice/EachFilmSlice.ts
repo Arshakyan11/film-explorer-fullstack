@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 import { fetchTrailerThunk, getOneMovieThunk } from "../api/api";
+import type { MovieType } from "../../types/dataTypes";
 
 export type EachFilmSliceType = {
   loading: boolean;
   error: string | null;
   pagee: number;
   currentID: number | null;
-  eachData: any[];
+  eachData: MovieType[];
   haveTrailer: boolean;
   trailerKey: string | null;
 };

@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 import { getFilmsByQueryThunk } from "../api/api";
+import type { MovieType } from "../../types/dataTypes";
 
 export type SearchingEachSliceType = {
   isLoading: boolean;
   error: null | string;
-  allFilmsInSearchingNAV: any[];
-  allFilmsInSearchingMAIN: any[];
-  searchingResult: any[];
+  allFilmsInSearchingNAV: MovieType[];
+  allFilmsInSearchingMAIN: MovieType[];
+  searchingResult: MovieType[];
   queryName: string;
 };
 const initialState: SearchingEachSliceType = {

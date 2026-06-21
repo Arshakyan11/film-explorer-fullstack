@@ -1,5 +1,7 @@
+import type { MovieType } from "./dataTypes";
+
 export type GetFilmByWantedPageThunkType = {
-  data: any[];
+  data: MovieType[];
   currentPage: number;
   currentID: number;
 };
@@ -10,11 +12,11 @@ export type GetFilmByWantedPageReqType = {
 };
 
 export type GetFilmsForSectionResponseType = {
-  films: any[];
+  films: MovieType[];
 };
 
 export type GetOneMovieThunkType = {
-  data: any[];
+  data: MovieType[];
   page: number;
   id: number;
 };

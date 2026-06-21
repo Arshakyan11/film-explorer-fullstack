@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { RootState } from "../../app/store";
 import { getFilmByWantedPageThunk, getFooterDataThunk } from "../api/api";
+import type { MovieType } from "../../types/dataTypes";
 
 export type AllFilmDataType = {
   userInfo: any[] | null;
   data: {
-    mainData: any[];
-    footerData: any[];
+    mainData: MovieType[];
+    footerData: MovieType[];
   };
   currentPage: number;
   currentID: number;

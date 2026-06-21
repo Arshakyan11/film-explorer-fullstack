@@ -1,4 +1,3 @@
-import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getFilmByWantedPageService,
@@ -11,7 +10,6 @@ import type {
   AllPlansResponseType,
   GetFilmByWantedPageReqType,
   GetFilmByWantedPageThunkType,
-  GetFilmsForSectionResponseType,
   GetOneMovieReqType,
   GetOneMovieThunkType,
   SavePlanOfTheAccountResType,
@@ -40,15 +38,7 @@ import {
   getWatchlistService,
   removeItemOfWatchlistService,
 } from "../../services/watchlist.service";
-
-const instance = axios.create({
-  baseURL: import.meta.env.VITE_FILM_MAIN_URL,
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: import.meta.env.VITE_FILM_TOKEN,
-  },
-});
+import type { MovieType, WatchlistItemType } from "../../types/dataTypes";
 
 export const getFilmByWantedPageThunk = createAsyncThunk<
   GetFilmByWantedPageThunkType,
@@ -75,7 +65,7 @@ export const getFilmByWantedPageThunk = createAsyncThunk<
 );
 
 export const getFooterDataThunk = createAsyncThunk<
-  any[],
+  MovieType[],
   number,
   { rejectValue: string }
 >(
@@ -232,7 +222,7 @@ export const getCurretUserInfoThunk = createAsyncThunk<
 });
 
 export const getFilmsForSectionDisplayThunk = createAsyncThunk<
-  GetFilmsForSectionResponseType[],
+  MovieType[],
   void,
   { rejectValue: string }
 >(
@@ -250,7 +240,7 @@ export const getFilmsForSectionDisplayThunk = createAsyncThunk<
 );
 
 export const getWatchlistThunk = createAsyncThunk<
-  any[],
+  WatchlistItemType[],
   void,
   { rejectValue: string }
 >("watchlist/getWatchlistThunk", async (_, { rejectWithValue }) => {
@@ -300,7 +290,7 @@ export const removeItemOfWatchlistThunk = createAsyncThunk<
 export const getFilmsByQueryThunk = createAsyncThunk<
   {
     queryName: string;
-    films: any[];
+    films: MovieType[];
     searchType: "navigationSearch" | "mainSearch";
   },
   {

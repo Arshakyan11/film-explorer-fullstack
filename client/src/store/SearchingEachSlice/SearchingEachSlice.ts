@@ -26,9 +26,6 @@ const SearchingEachSlice = createSlice({
     setingSearchResult(state, action) {
       state.searchingResult = action.payload;
     },
-    setingSearchResultALlData(state, action) {
-      state.allFilmsInSearchingMAIN = action.payload;
-    },
     transferData(state) {
       state.allFilmsInSearchingMAIN = state.allFilmsInSearchingNAV;
     },
@@ -56,8 +53,7 @@ const SearchingEachSlice = createSlice({
 });
 
 export default SearchingEachSlice.reducer;
-export const { setingSearchResult, setingSearchResultALlData, transferData } =
-  SearchingEachSlice.actions;
+export const { setingSearchResult, transferData } = SearchingEachSlice.actions;
 export const globalSearchingEach = (state: RootState) => state.searchingEach;
 export const searchingEachQuerryName = (state: RootState) =>
   state.searchingEach.queryName;

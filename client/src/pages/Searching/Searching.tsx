@@ -76,7 +76,7 @@ const Searching = () => {
                           dispatch(setingSearchResult([movie]));
                           localStorage.setItem(
                             "searchResult",
-                            JSON.stringify([searchResults, [movie]]),
+                            JSON.stringify(movie),
                           );
                         }}
                       >

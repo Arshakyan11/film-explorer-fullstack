@@ -120,7 +120,7 @@ const NavBar = () => {
                           onClick={() => {
                             localStorage.setItem(
                               "searchResult",
-                              JSON.stringify([searchResults, [movie]]),
+                              JSON.stringify(movie),
                             );
                             dispatch(transferData());
                             dispatch(
@@ -307,7 +307,7 @@ const NavBar = () => {
                             onClick={() => {
                               localStorage.setItem(
                                 "searchResult",
-                                JSON.stringify([searchResults, [movie]]),
+                                JSON.stringify(movie),
                               );
                               dispatch(transferData());
                               dispatch(

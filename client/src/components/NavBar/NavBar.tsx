@@ -95,10 +95,18 @@ const NavBar = () => {
                   placeholder="Search movies..."
                   ref={inputRef}
                   onChange={(e) =>
-                    HandleSearch(e.target.value, dispatch, getFilmsByQueryThunk)
+                    HandleSearch(
+                      (e.target as HTMLInputElement).value,
+                      dispatch,
+                      getFilmsByQueryThunk,
+                    )
                   }
-                  onClick={(e) =>
-                    HandleSearch(e.target.value, dispatch, getFilmsByQueryThunk)
+                  onClick={() =>
+                    HandleSearch(
+                      inputRef.current?.value ?? "",
+                      dispatch,
+                      getFilmsByQueryThunk,
+                    )
                   }
                 />
                 {searchResults.length > 0 && (
@@ -138,7 +146,7 @@ const NavBar = () => {
                         onClick={() => {
                           dispatch(
                             getFilmsByQueryThunk({
-                              query: inputRef.current.value,
+                              query: inputRef.current?.value ?? "",
                               searchType: "mainSearch",
                             }),
                           );
@@ -282,7 +290,7 @@ const NavBar = () => {
                     }
                     onClick={(e) =>
                       HandleSearch(
-                        e.target.value,
+                        (e.target as HTMLInputElement).value,
                         dispatch,
                         getFilmsByQueryThunk,
                       )
@@ -326,7 +334,7 @@ const NavBar = () => {
                           onClick={() => {
                             dispatch(
                               getFilmsByQueryThunk({
-                                query: inputRef.current.value,
+                                query: inputRef.current?.value ?? "",
                                 searchType: "mainSearch",
                               }),
                             );

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { star } from "../../components/Images";
 import { ROUTES } from "../../routes/Routes";
-import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./SearchResults.module.scss";
 import {
@@ -15,13 +14,14 @@ import {
   setingSearchResult,
   setingSearchResultALlData,
 } from "../../store/SearchingEachSlice/SearchingEachSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 
 const SearchResults = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const localSearchResult = JSON.parse(localStorage.getItem("searchResult"));
-  const searchResults = useSelector(searchingEachResult);
-  const haveTrailer = useSelector(getHaveTrailerBollean);
-  const trailerKey = useSelector(getTrailerKey);
+  const searchResults = useAppSelector(searchingEachResult);
+  const haveTrailer = useAppSelector(getHaveTrailerBollean);
+  const trailerKey = useAppSelector(getTrailerKey);
   useEffect(() => {
     dispatch(setingSearchResult(localSearchResult[1]));
     dispatch(setingSearchResultALlData(localSearchResult[0]));

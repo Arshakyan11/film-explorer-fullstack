@@ -297,14 +297,6 @@ export const removeItemOfWatchlistThunk = createAsyncThunk<
   },
 );
 
-export const Axios = {
-  getDataByQuery(querry) {
-    return instance({
-      baseURL: `https://api.themoviedb.org/3/search/movie?query=${querry}&include_adult=false`,
-    });
-  },
-};
-
 export const getFilmsByQueryThunk = createAsyncThunk<
   {
     queryName: string;

@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { star } from "../Images";
 import { ROUTES } from "../../routes/Routes";
-import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./EachFilmSection.module.scss";
 import { fetchTrailerThunk, getOneMovieThunk } from "../../store/api/api";
@@ -11,14 +10,15 @@ import {
   gettDataAllofPage,
   getTrailerKey,
 } from "../../store/EachFilmSlice/EachFilmSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 
 const EachFilmSection = () => {
   const { page, id } = useParams();
-  const { eachData } = useSelector(gettDataAllofPage);
-  const dispatch = useDispatch();
+  const { eachData } = useAppSelector(gettDataAllofPage);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const haveTrailer = useSelector(getHaveTrailerBollean);
-  const trailerKey = useSelector(getTrailerKey);
+  const haveTrailer = useAppSelector(getHaveTrailerBollean);
+  const trailerKey = useAppSelector(getTrailerKey);
   useEffect(() => {
     if (!Number.isNaN(Number(page)) && !Number.isNaN(Number(id))) {
       dispatch(
@@ -27,7 +27,7 @@ const EachFilmSection = () => {
           idArgument: Number(id),
         }),
       );
-      dispatch(fetchTrailerThunk(id));
+      dispatch(fetchTrailerThunk(Number(id)));
     } else {
       navigate(`${ROUTES.ERROR}`);
     }

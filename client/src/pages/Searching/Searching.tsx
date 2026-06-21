@@ -12,7 +12,6 @@ import {
   searchingEachDataMAIN,
   setingSearchResult,
 } from "../../store/SearchingEachSlice/SearchingEachSlice";
-import { getFilmsByQueryThunk } from "../../store/api/api";
 
 const Searching = () => {
   const dispatch = useAppDispatch();
@@ -28,11 +27,7 @@ const Searching = () => {
               type="text"
               placeholder="Search movies..."
               onChange={(e) => {
-                HandleSearchMAIN(
-                  e.target.value,
-                  dispatch,
-                  getFilmsByQueryThunk,
-                );
+                HandleSearchMAIN(e.target.value, dispatch);
               }}
             />
           </div>

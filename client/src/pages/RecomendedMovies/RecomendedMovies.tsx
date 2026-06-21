@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./RecomendedMovies.module.scss";
 import AllFilmsSorted from "../../components/AllFilmsSorted/AllFilmsSorted";
 

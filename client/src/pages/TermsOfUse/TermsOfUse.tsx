@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./TermsOfUse.module.scss";
 const TermsOfUse = () => {
   return (
@@ -89,12 +88,12 @@ const TermsOfUse = () => {
               <p>
                 If you have any questions about these Terms, please contact us
                 at
-              <a
-                href="mailto:erikarshakyan555@gmail.com"
-                className={styles.emailText}
-              >
-                erikarshakyan555@gmail.com
-              </a>
+                <a
+                  href="mailto:erikarshakyan555@gmail.com"
+                  className={styles.emailText}
+                >
+                  erikarshakyan555@gmail.com
+                </a>
               </p>
             </li>
           </ul>

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ROUTES } from "../../routes/Routes.jsx";
-import MovieSliderHomePage from "../../components/MovieSliderHomePage/MovieSliderHomePage.jsx";
+import MovieSliderHomePage from "../../components/MovieSliderHomePage/MovieSliderHomePage.js";
 import styles from "./Home.module.scss";
 import { useAppDispatch } from "../../app/store.js";
 import FilmsBoxLine from "../../components/FilmsBoxLine/FilmsBoxLine.js";

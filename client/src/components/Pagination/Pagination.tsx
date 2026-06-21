@@ -1,10 +1,10 @@
-import React from "react";
-import { useDispatch } from "react-redux";
 import "./Pagination.scss";
+import { useAppDispatch } from "../../app/store";
+import { getFilmByWantedPageThunk } from "../../store/api/api";
 
 const Pagination = ({ currentPage, idByPages = 1 }) => {
   const pages = Array.from({ length: 10 }, (_, i) => i + idByPages);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   return (
     <div className="btns">
       <button
@@ -26,11 +26,9 @@ const Pagination = ({ currentPage, idByPages = 1 }) => {
           className={currentPage - idByPages + 1 === index + 1 ? "active" : ""}
           onClick={() =>
             dispatch(
-              dispatch(
-                getFilmByWantedPageThunk({
-                  pageArgument: elm,
-                }),
-              ),
+              getFilmByWantedPageThunk({
+                pageArgument: elm,
+              }),
             )
           }
         >
@@ -42,11 +40,9 @@ const Pagination = ({ currentPage, idByPages = 1 }) => {
         disabled={currentPage === idByPages + 9}
         onClick={() =>
           dispatch(
-            dispatch(
-              getFilmByWantedPageThunk({
-                pageArgument: currentPage + 1,
-              }),
-            ),
+            getFilmByWantedPageThunk({
+              pageArgument: currentPage + 1,
+            }),
           )
         }
       >

@@ -5,8 +5,8 @@ import { getFilmByWantedPageThunk, getFooterDataThunk } from "../api/api";
 export type AllFilmDataType = {
   userInfo: any[] | null;
   data: {
-    mainData: any[] | null;
-    footerData: any[] | null;
+    mainData: any[];
+    footerData: any[];
   };
   currentPage: number;
   currentID: number;

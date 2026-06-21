@@ -1,4 +1,3 @@
-import React from "react";
 import { poster } from "../../components/Images";
 
 import styles from "./AboutUs.module.scss";
@@ -39,7 +38,7 @@ const AboutUs = () => {
             </div>
           </div>
           <div className={styles.images}>
-              <img src={poster} alt="Poster" className={styles.poster} />
+            <img src={poster} alt="Poster" className={styles.poster} />
           </div>
         </div>
       </div>

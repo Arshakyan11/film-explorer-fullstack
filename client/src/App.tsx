@@ -4,7 +4,7 @@ import styles from "./App.module.scss";
 import {
   AboutUs,
   EachFilm,
-  ErrorPage,
+  Error,
   Home,
   Login,
   Movies,
@@ -64,7 +64,7 @@ function App() {
           <Route path={ROUTES.LOGIN} element={<Login />} />
           <Route path={`profile/${ROUTES.PLANS}`} element={<Plans />} />
           <Route path={`profile/${ROUTES.WATCHLIST}`} element={<Watchlist />} />
-          <Route path={ROUTES.ERROR} element={<ErrorPage />} />
+          <Route path={ROUTES.ERROR} element={<Error />} />
           <Route path={ROUTES.TERMSOFUSE} element={<TermsOfUse />} />
           <Route path={ROUTES.PRIVACYPAGE} element={<PolicyPage />} />
         </Route>

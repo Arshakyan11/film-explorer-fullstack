@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styles from "./Watchlist.module.scss";
 import { ROUTES } from "../../routes/Routes";
 import { Link } from "react-router-dom";
-import { notifyforRemoving } from "../../helpers/notifyUser";
+import { notifyforRemoving } from "../../helpers/notifyUser.ts";
 import { filmNotFound } from "../../components/Images";
 import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
 import { getAllWatchlistInfo } from "../../store/WatchlistSlice/WatchlistSlice";

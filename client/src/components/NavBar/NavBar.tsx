@@ -11,12 +11,13 @@ import { HandleSearch } from "../../helpers/searchHelper.js";
 import "./NavBar.scss";
 import { isTokenValid } from "../../helpers/checkToken.js";
 import { useAppDispatch, useAppSelector } from "../../app/store.js";
+
+import { getFilmsByQueryThunk } from "../../store/api/api.js";
 import {
   searchingEachData,
   setingSearchResult,
   transferData,
 } from "../../store/SearchingEachSlice/SearchingEachSlice.js";
-import { getFilmsByQueryThunk } from "../../store/api/api.js";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -95,18 +96,10 @@ const NavBar = () => {
                   placeholder="Search movies..."
                   ref={inputRef}
                   onChange={(e) =>
-                    HandleSearch(
-                      (e.target as HTMLInputElement).value,
-                      dispatch,
-                      getFilmsByQueryThunk,
-                    )
+                    HandleSearch((e.target as HTMLInputElement).value, dispatch)
                   }
                   onClick={() =>
-                    HandleSearch(
-                      inputRef.current?.value ?? "",
-                      dispatch,
-                      getFilmsByQueryThunk,
-                    )
+                    HandleSearch(inputRef.current?.value ?? "", dispatch)
                   }
                 />
                 {searchResults.length > 0 && (
@@ -166,7 +159,7 @@ const NavBar = () => {
                   </Link>
                   <div
                     className="sign"
-                    onClick={() => LogoutFromAccount(navigate, dispatch)}
+                    onClick={() => LogoutFromAccount(navigate)}
                   >
                     <FaRightToBracket />
                     <p>Log Out</p>
@@ -246,7 +239,7 @@ const NavBar = () => {
                     <div
                       className="sign"
                       onClick={() => {
-                        LogoutFromAccount(navigate, dispatch);
+                        LogoutFromAccount(navigate);
                         setIsOpen(false);
                       }}
                     >
@@ -281,18 +274,11 @@ const NavBar = () => {
                     type="text"
                     placeholder="Search movies..."
                     ref={inputRef}
-                    onChange={(e) =>
-                      HandleSearch(
-                        e.target.value,
-                        dispatch,
-                        getFilmsByQueryThunk,
-                      )
-                    }
+                    onChange={(e) => HandleSearch(e.target.value, dispatch)}
                     onClick={(e) =>
                       HandleSearch(
                         (e.target as HTMLInputElement).value,
                         dispatch,
-                        getFilmsByQueryThunk,
                       )
                     }
                   />

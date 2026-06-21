@@ -8,7 +8,6 @@ import {
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../routes/Routes";
-import { useDispatch, useSelector } from "react-redux";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -17,10 +16,11 @@ import "swiper/css/navigation";
 import "./MovieSliderHomePage.scss";
 import { gettingDataPage } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
 import { getFilmByWantedPageThunk } from "../../store/api/api";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 
 export default function Movies() {
-  const dispatch = useDispatch();
-  const data = useSelector(gettingDataPage);
+  const dispatch = useAppDispatch();
+  const data = useAppSelector(gettingDataPage);
   useEffect(() => {
     dispatch(
       getFilmByWantedPageThunk({

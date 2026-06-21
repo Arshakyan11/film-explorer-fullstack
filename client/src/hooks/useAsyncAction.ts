@@ -1,4 +1,4 @@
-import { notifyForSmthBad, notifyForSmth } from "../helpers/notifyUser";
+import { notifyForSmthBad, notifyForSmth } from "../helpers/notifyUser.ts";
 
 type AsyncActionOptions<T> = {
   action: () => Promise<T>;

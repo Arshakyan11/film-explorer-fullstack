@@ -11,16 +11,17 @@ import {
 } from "react-icons/fa";
 import { ROUTES } from "../../routes/Routes";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./Footer.module.scss";
 import { getFooterDataThunk, getOneMovieThunk } from "../../store/api/api";
 import { gettingDataPageFooter } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
+import { useAppDispatch, useAppSelector } from "../../app/store";
+import { isTokenValid } from "../../helpers/checkToken";
 
 const Footer = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  let data = useSelector(gettingDataPageFooter);
-  const isLogged = JSON.parse(localStorage.getItem("usersInfo"));
+  let data = useAppSelector(gettingDataPageFooter);
+  const isLogged = isTokenValid();
 
   const footerMovies = data.slice(0, 8);
   useEffect(() => {
@@ -132,7 +133,7 @@ const Footer = () => {
                   <Link to={ROUTES.MOVIES}>Movies</Link>
                 </h3>
                 <ul>
-                  {footerMovies.length > 0 ? (
+                  {footerMovies?.length > 0 ? (
                     footerMovies.map((movie) => (
                       <li
                         key={movie.id}

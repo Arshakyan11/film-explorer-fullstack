@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ROUTES } from "../../routes/Routes";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./Movies.module.scss";
 import { gettingGlobal } from "../../store/AllFilmDataSlice/AllFilmDataSlice";
 import {
@@ -8,12 +7,15 @@ import {
   getFilmsForSectionDisplayThunk,
 } from "../../store/api/api";
 import FilmsBoxLine from "../../components/FilmsBoxLine/FilmsBoxLine";
+import { useAppDispatch, useAppSelector } from "../../app/store";
 
 const Movies = () => {
   let forMoviesOnly = true;
-  const dispatch = useDispatch();
-  let { data, currentID } = useSelector(gettingGlobal);
-  data = data.mainData;
+  const dispatch = useAppDispatch();
+  const {
+    data: { mainData },
+    currentID,
+  } = useAppSelector(gettingGlobal);
   useEffect(() => {
     dispatch(
       getFilmByWantedPageThunk({
@@ -29,7 +31,7 @@ const Movies = () => {
       <div className={styles.container}>
         <div className={styles.movieSection}>
           <div className={styles.movieBox}>
-            {data
+            {mainData
               .filter((elm) => elm.id === currentID)
               .map((item) => {
                 return (

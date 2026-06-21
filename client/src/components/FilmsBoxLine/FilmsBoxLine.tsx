@@ -8,6 +8,15 @@ import { isTokenValid } from "../../helpers/checkToken";
 import { useAppDispatch, useAppSelector } from "../../app/store";
 import { getAllPaginationInfo } from "../../store/PaginationSlice/PaginationSlice";
 import { addItemTotheWatchlistHelper } from "../../helpers/createUserFrom";
+import type { MoviesCategoryType, MoviesDataType } from "../../types/dataTypes";
+
+interface FilmsBoxLine {
+  moviesCategory: MoviesCategoryType;
+  forMoviesOnly?: boolean;
+  typofMovieSection: string;
+  dataType: MoviesDataType;
+  forRecomndOnly?: boolean;
+}
 
 const FilmsBoxLine = ({
   moviesCategory,
@@ -15,7 +24,7 @@ const FilmsBoxLine = ({
   typofMovieSection,
   dataType,
   forRecomndOnly,
-}) => {
+}: FilmsBoxLine) => {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector(getAllPaginationInfo);
   const isLogged = isTokenValid();

@@ -1,7 +1,7 @@
 @use "../../global/global.scss" as *;
 section {
   .registrationSec {
-    background: url("../../../img/backgroundi.jpg");
+    background: url("/img/backgroundi.jpg");
     background-position: center;
     @include disFlex();
     flex-direction: column;

@@ -14,7 +14,7 @@ import {
 
 const Registration = () => {
   const dispatch = useAppDispatch();
-  const { isHiden, initialValues } = useAppSelector(getAllRegInfo);
+  const { isHiden, initialValues, isLoading } = useAppSelector(getAllRegInfo);
   const navigate = useNavigate();
   return (
     <section>
@@ -107,7 +107,9 @@ const Registration = () => {
                 </legend>
               </fieldset>
               <div className={styles.btns}>
-                <button type="submit">Register</button>
+                <button type="submit" disabled={isLoading}>
+                  {isLoading ? "Connecting to server..." : "Register"}
+                </button>
                 <Link to={`/${ROUTES.LOGIN}`}> Go to Login</Link>
               </div>
             </Form>

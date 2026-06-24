@@ -24,6 +24,12 @@ app.use("/auth/login", loginLimiter);
 app.use("/auth/registration", loginLimiter);
 app.use(appLimiter);
 
+app.get("/", (req, res) => {
+  res
+    .status(200)
+    .json({ status: "ok", message: "Film Explorer API is running" });
+});
+
 app.use("/auth", AuthRoute);
 app.use("/watchlist", WatchlistRoute);
 app.use("/subscription", SubscriptionRoute);
@@ -32,7 +38,7 @@ app.use(
   (
     err: Error & { status?: number },
     req: Request,
-    res: Response,
+    res: Response,  
     next: NextFunction,
   ) => {
     const status = err.status || 500;
@@ -44,9 +50,8 @@ app.use(
 
 const runServer = () => {
   const PORT = process.env.PORT || 8000;
-  const HOST = process.env.HOST;
   app.listen(PORT, () => {
-    console.log(`SERVER CONNECTED SUCCESSFULLY \nhttp://${HOST}:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
   });
 };
 

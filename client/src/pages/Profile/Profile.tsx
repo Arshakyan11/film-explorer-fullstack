@@ -24,7 +24,6 @@ const Profile = () => {
     formik: FormikHelpers<ProfileFormValues>,
   ) => {
     const { newPasswordRepeat, ...resetData } = e;
-    console.log(resetData);
     editiingProfileInfo(resetData, formik, dispatch);
   };
   if (!userInfo) return null;

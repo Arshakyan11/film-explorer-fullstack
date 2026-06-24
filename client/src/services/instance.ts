@@ -7,7 +7,7 @@ export const mainInstance = axios.create({
   timeoutErrorMessage: "Request timeout",
   headers: {
     accept: "application/json",
-    Authorization: import.meta.env.VITE_FILM_TOKEN,
+    Authorization: `Bearer ${import.meta.env.VITE_FILM_TOKEN}`,
   },
 });
 

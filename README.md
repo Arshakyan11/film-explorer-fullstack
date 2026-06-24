@@ -9,7 +9,7 @@ Users can browse and search for movies, view detailed information, create an acc
 ## Live Demo
 
 - Frontend: https://film-explorer.vercel.app
-- Backend API: https://film-explorer-api.up.railway.app
+- Backend API: https://film-explorer-ufag.onrender.com
 
 ## Features
 

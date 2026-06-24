@@ -16,7 +16,7 @@ import type { SignInUserSendingType } from "../../types/formTypes";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { initialValues, isHiden } = useAppSelector(loginGlobal);
+  const { initialValues, isHiden, isLoading } = useAppSelector(loginGlobal);
 
   return (
     <section>
@@ -64,7 +64,9 @@ const Login = () => {
                 </legend>
               </fieldset>
               <div className={styles.btns}>
-                <button type="submit">Login</button>
+                <button type="submit" disabled={isLoading}>
+                  {isLoading ? "Connecting to server..." : "Login"}
+                </button>
                 <Link to={`/${ROUTES.REGISTRATION}`}>Go to Registration</Link>
               </div>
             </Form>

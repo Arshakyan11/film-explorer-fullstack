@@ -23,7 +23,16 @@ import {
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import { Bounce, ToastContainer } from "react-toastify";
 import { ROUTES } from "./routes/Routes";
+import { useEffect } from "react";
+import { notifyForSmth } from "./helpers/notifyUser";
+
 function App() {
+  useEffect(() => {
+    notifyForSmth(
+      "Server is starting. First request may take up to 1 minute on free hosting.",
+    );
+  }, []);
+
   return (
     <div>
       <ScrollToTop />

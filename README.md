@@ -8,7 +8,7 @@ Users can browse and search for movies, view detailed information, create an acc
 
 ## Live Demo
 
-- Frontend: https://film-explorer.vercel.app
+- Frontend: https://film-explorer-one.netlify.app
 - Backend API: https://film-explorer-ufag.onrender.com
 
 ## Features

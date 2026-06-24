@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import LayOut from "./LayOut/LayOut";
-import styles from "./App.module.scss";
+import "./App.scss";
 import {
   AboutUs,
   EachFilm,

@@ -16,6 +16,11 @@ const Home = () => {
     <section className={styles.home}>
       <div className={styles.container}>
         <div className={styles.homeSection}>
+          <div className={styles.serverInfo}>
+            ⚡ Demo Notice: Authentication features use a free Render backend.
+            The first login or registration request may take up to 1 minute
+            after inactivity.
+          </div>
           <MovieSliderHomePage />
           <FilmsBoxLine
             moviesCategory="Popular Movies"

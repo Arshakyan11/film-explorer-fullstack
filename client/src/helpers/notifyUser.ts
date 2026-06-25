@@ -11,6 +11,7 @@ export const notifyforAdding = () =>
     progress: undefined,
     theme: "light",
     transition: Bounce,
+    className: "toastifyEditing",
     type: "success",
   });
 
@@ -25,6 +26,7 @@ export const notifyforRemoving = () =>
     progress: undefined,
     theme: "light",
     transition: Bounce,
+    className: "toastifyEditing",
     type: "warning",
   });
 
@@ -39,6 +41,7 @@ export const notifyforisExisting = () =>
     progress: undefined,
     theme: "light",
     transition: Bounce,
+    className: "toastifyEditing",
     type: "error",
   });
 
@@ -53,6 +56,7 @@ export const notifyForSmth = (text) =>
     progress: undefined,
     theme: "light",
     transition: Bounce,
+    className: "toastifyEditing",
     type: "success",
   });
 
@@ -67,5 +71,6 @@ export const notifyForSmthBad = (text) =>
     progress: undefined,
     theme: "light",
     transition: Bounce,
+    className: "toastifyEditing",
     type: "error",
   });

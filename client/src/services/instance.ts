@@ -3,7 +3,7 @@ import axios from "axios";
 export const mainInstance = axios.create({
   baseURL: import.meta.env.VITE_FILM_MAIN_URL,
   method: "GET",
-  timeout: 10000,
+  timeout: 20000,
   timeoutErrorMessage: "Request timeout",
   headers: {
     accept: "application/json",
@@ -13,7 +13,7 @@ export const mainInstance = axios.create({
 
 export const apiClient = axios.create({
   baseURL: "",
-  timeout: 10000,
+  timeout: 20000,
   timeoutErrorMessage: "Request timeout",
   headers: {
     "Content-Type": "application/json",

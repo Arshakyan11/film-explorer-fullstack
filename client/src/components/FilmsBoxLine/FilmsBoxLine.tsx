@@ -42,19 +42,7 @@ const FilmsBoxLine = ({
         <div className={styles.data}>
           {data[dataType]?.map((elm) => {
             return (
-              <div
-                key={elm.id}
-                className={styles.filmsLineSection_eachBox}
-                onClick={() =>
-                  forMoviesOnly &&
-                  dispatch(
-                    getFilmByWantedPageThunk({
-                      pageArgument: 31,
-                      idArgument: elm.id,
-                    }),
-                  )
-                }
-              >
+              <div key={elm.id} className={styles.filmsLineSection_eachBox}>
                 <img
                   src={`https://image.tmdb.org/t/p/w185/${elm.poster_path}`}
                   alt="film"
@@ -75,6 +63,15 @@ const FilmsBoxLine = ({
                   <Link
                     className={styles.link1}
                     to={`/${ROUTES.MOVIES}/7/${elm.id}`}
+                    onClick={() =>
+                      forMoviesOnly &&
+                      dispatch(
+                        getFilmByWantedPageThunk({
+                          pageArgument: 31,
+                          idArgument: elm.id,
+                        }),
+                      )
+                    }
                   >
                     See More
                   </Link>

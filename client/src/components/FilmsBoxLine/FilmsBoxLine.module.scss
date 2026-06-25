@@ -131,7 +131,9 @@ section {
             padding: 12px 22px;
             border-radius: 8px;
             cursor: pointer;
-            transition: opacity 0.3s, transform 0.3s;
+            transition:
+              opacity 0.3s,
+              transform 0.3s;
           }
           .link1 {
             position: absolute;
@@ -390,6 +392,17 @@ section {
           }
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .filmsLineSection_eachBox:hover {
+    transform: none;
+  }
+  .filmsLineSection_eachBox_info {
+    .link1 {
+      opacity: 1 !important;
     }
   }
 }

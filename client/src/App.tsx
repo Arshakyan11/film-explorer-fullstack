@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <>
       <ScrollToTop />
       <ToastContainer
         position="top-right"
@@ -75,7 +75,7 @@ function App() {
           <Route path={ROUTES.PRIVACYPAGE} element={<PolicyPage />} />
         </Route>
       </Routes>
-    </div>
+    </>
   );
 }
 

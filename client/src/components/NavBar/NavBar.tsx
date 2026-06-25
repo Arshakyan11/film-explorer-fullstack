@@ -25,12 +25,14 @@ const NavBar = () => {
   const isLogged = isTokenValid();
   const searchResults = useAppSelector(searchingEachData);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpenSearchResult, setIsOpenSearchResult] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const clickOutside = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setIsOpenSearchResult(false);
         dispatch(
           getFilmsByQueryThunk({
             query: "",
@@ -61,25 +63,28 @@ const NavBar = () => {
               </div>
               <ul>
                 <li>
-                  <NavLink to={ROUTES.HOME}>
+                  <NavLink to={ROUTES.HOME} onClick={() => setIsOpen(false)}>
                     <FaHouse />
                     <span>Home</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={ROUTES.MOVIES}>
+                  <NavLink to={ROUTES.MOVIES} onClick={() => setIsOpen(false)}>
                     <FaVideo />
                     <span>Movies</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={ROUTES.ABOUTUS}>
+                  <NavLink to={ROUTES.ABOUTUS} onClick={() => setIsOpen(false)}>
                     <FaReceipt />
                     <span>About Us</span>
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to={ROUTES.SEARCHING}>
+                  <NavLink
+                    to={ROUTES.SEARCHING}
+                    onClick={() => setIsOpen(false)}
+                  >
                     <FaMagnifyingGlass />
                     <span>Searching</span>
                   </NavLink>
@@ -96,13 +101,17 @@ const NavBar = () => {
                   placeholder="Search movies..."
                   ref={inputRef}
                   onChange={(e) =>
-                    HandleSearch((e.target as HTMLInputElement).value, dispatch)
+                    HandleSearch(
+                      (e.target as HTMLInputElement).value,
+                      dispatch,
+                      setIsOpenSearchResult,
+                    )
                   }
                   onClick={() =>
                     HandleSearch(inputRef.current?.value ?? "", dispatch)
                   }
                 />
-                {searchResults.length > 0 && (
+                {searchResults.length > 0 && isOpenSearchResult && (
                   <ul className="searchResults">
                     {searchResults.slice(0, 5).map((movie) => (
                       <li key={movie.id}>
@@ -142,7 +151,9 @@ const NavBar = () => {
                               query: inputRef.current?.value ?? "",
                               searchType: "mainSearch",
                             }),
-                          );
+                          ).then(() => {
+                            setIsOpenSearchResult(false);
+                          });
                         }}
                       >
                         EXPLORE RELATED FILMS
@@ -274,7 +285,13 @@ const NavBar = () => {
                     type="text"
                     placeholder="Search movies..."
                     ref={inputRef}
-                    onChange={(e) => HandleSearch(e.target.value, dispatch)}
+                    onChange={(e) =>
+                      HandleSearch(
+                        e.target.value,
+                        dispatch,
+                        setIsOpenSearchResult,
+                      )
+                    }
                     onClick={(e) =>
                       HandleSearch(
                         (e.target as HTMLInputElement).value,
@@ -330,7 +347,9 @@ const NavBar = () => {
                                 query: "",
                                 searchType: "navigationSearch",
                               }),
-                            );
+                            ).then(() => {
+                              setIsOpenSearchResult(false);
+                            });
                           }}
                         >
                           EXPLORE RELATED FILMS

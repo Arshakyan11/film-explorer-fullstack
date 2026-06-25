@@ -141,7 +141,12 @@ export const loginUserThunk = createAsyncThunk<
   try {
     const res = await loginService(data);
     return res;
-  } catch (error) {
+  } catch (error: any) {
+    if (!error.response) {
+      return rejectWithValue(
+        "Server is waking up, please wait a few seconds and try again.",
+      );
+    }
     return rejectWithValue(extractErrorMessage(error, "Error while login"));
   }
 });
@@ -154,7 +159,12 @@ export const registerUserThunk = createAsyncThunk<
   try {
     await registerService(data);
     return "Account Registered Successfuly";
-  } catch (error) {
+  } catch (error: any) {
+    if (!error.response) {
+      return rejectWithValue(
+        "Server is waking up, please wait a few seconds and try again.",
+      );
+    }
     return rejectWithValue(
       extractErrorMessage(error, "Error while registration"),
     );

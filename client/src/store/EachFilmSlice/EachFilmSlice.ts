@@ -48,6 +48,7 @@ export const EachFilmSlice = createSlice({
     builder.addCase(fetchTrailerThunk.pending, (state) => {
       state.loading = true;
       state.error = null;
+      state.trailerKey = null;
     });
     builder.addCase(fetchTrailerThunk.fulfilled, (state, action) => {
       state.loading = false;

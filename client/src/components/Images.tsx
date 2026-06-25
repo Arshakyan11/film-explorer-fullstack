@@ -3,7 +3,7 @@ import searchImg from "../assets/images/searchIcon.png";
 import signIn from "../assets/images/signIn.png";
 import star from "../assets/images/star.png";
 import background from "../assets/images/AboutUs.jpg";
-import poster from "../assets/images/filmPosters.png";
+import poster from "../assets/images/filmPosters.webp";
 import payPal from "../assets/images/PayPal.png";
 import tv from "../assets/images/tv.png";
 import ecoPayz from "../assets/images/ecopayz.svg";
